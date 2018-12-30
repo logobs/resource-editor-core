@@ -11,9 +11,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import com.lbs.re.util.converter.OwnerProductConverter;
-import com.lbs.re.util.converter.ResourceCaseConverter;
-import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -21,6 +18,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.lbs.re.util.EnumsV2.OwnerProduct;
 import com.lbs.re.util.EnumsV2.ResourceCase;
+import com.lbs.re.util.converter.OwnerProductConverter;
+import com.lbs.re.util.converter.ResourceCaseConverter;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -34,18 +33,14 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	private Integer active;
 
 	@LastModifiedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "AUTOMODIFIEDON", columnDefinition = "datetime")
-	@DateTimeFormat
 	private LocalDateTime automodifiedon;
 
 	@Column(name = "CREATEDBY")
 	private Integer createdby;
 
 	@CreatedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "CREATEDON", columnDefinition = "datetime")
-	@DateTimeFormat
 	private LocalDateTime createdon;
 
 	@Column(name = "INFO", columnDefinition = "nvarchar(20)")
@@ -61,7 +56,6 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	private Integer modifiedby;
 
 	@LastModifiedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime modifiedon;

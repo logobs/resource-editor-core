@@ -7,15 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -45,7 +41,6 @@ public class ReStandard extends AbstractBaseEntity implements Serializable {
 	private Integer createdby;
 
 	@CreatedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "CREATEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime createdon;
@@ -57,7 +52,6 @@ public class ReStandard extends AbstractBaseEntity implements Serializable {
 	private Integer modifiedby;
 
 	@LastModifiedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime modifiedon;

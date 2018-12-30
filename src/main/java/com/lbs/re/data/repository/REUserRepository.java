@@ -17,9 +17,9 @@
 
 package com.lbs.re.data.repository;
 
-import com.lbs.re.model.ReUser;
-
 import java.util.List;
+
+import com.lbs.re.model.ReUser;
 
 public interface REUserRepository extends BaseRepository<ReUser, Integer> {
     List<ReUser> findByUsername(String userName);

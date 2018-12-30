@@ -15,8 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.lbs.re.util.converter.UserTypeConverter;
-import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -27,6 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.lbs.re.util.EnumsV2.UserLanguage;
 import com.lbs.re.util.EnumsV2.UserLayoutType;
 import com.lbs.re.util.EnumsV2.UserType;
+import com.lbs.re.util.converter.UserTypeConverter;
 
 @Entity
 @Table(name = "RE_USERS", indexes = { @Index(name = "I_USERS_02", columnList = "USERNAME", unique = true) })
@@ -63,7 +62,6 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 	private Integer createdby;
 
 	@CreatedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "CREATEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime createdon;
@@ -119,7 +117,6 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 	private Integer modifiedby;
 
 	@LastModifiedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime modifiedon;

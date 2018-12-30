@@ -4,12 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -26,7 +22,6 @@ public class ReLanguageTable extends AbstractBaseEntity{
 	private Integer createdby;
 
 	@CreatedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "CREATEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime createdon;
@@ -39,7 +34,6 @@ public class ReLanguageTable extends AbstractBaseEntity{
 	private Integer modifiedby;
 
 	@LastModifiedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime modifiedon;

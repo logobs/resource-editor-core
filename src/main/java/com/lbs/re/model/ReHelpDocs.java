@@ -9,12 +9,12 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
-import com.lbs.re.util.converter.DocTypeConverter;
-import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import com.lbs.re.util.EnumsV2.DocType;
+import com.lbs.re.util.converter.DocTypeConverter;
 
 @Entity
 @Table(name = "RE_HELPDOCS", indexes = {
@@ -41,7 +41,6 @@ public class ReHelpDocs extends AbstractBaseEntity {
 	private int createdby;
 
 	@CreatedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "CREATEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime createdon;
@@ -49,7 +48,6 @@ public class ReHelpDocs extends AbstractBaseEntity {
 	@Column(name = "MODIFIEDBY", nullable = false)
 	private int modifiedby = 0;
 
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "MODIFIEDON", columnDefinition = "datetime", nullable = false)
 	@DateTimeFormat
 	private LocalDateTime modifiedon;

@@ -22,20 +22,19 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import com.lbs.re.util.converter.OwnerProductConverter;
-import com.lbs.re.util.converter.ResourceCaseConverter;
-import com.lbs.re.util.converter.ResourceStateConverter;
-import com.lbs.re.util.converter.ResourceTypeConverter;
-import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.lbs.re.util.EnumsV2.ResourceType;
-import com.lbs.re.util.EnumsV2.ResourceCase;
 import com.lbs.re.util.EnumsV2.OwnerProduct;
+import com.lbs.re.util.EnumsV2.ResourceCase;
 import com.lbs.re.util.EnumsV2.ResourceState;
+import com.lbs.re.util.EnumsV2.ResourceType;
+import com.lbs.re.util.converter.OwnerProductConverter;
+import com.lbs.re.util.converter.ResourceCaseConverter;
+import com.lbs.re.util.converter.ResourceStateConverter;
+import com.lbs.re.util.converter.ResourceTypeConverter;
 
 @Entity
 @Table(name = "RE_RESOURCES", indexes = {
@@ -71,7 +70,6 @@ public class ReResource extends AbstractBaseEntity {
 	private int createdby;
 
 	@CreatedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "CREATEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime createdon;
@@ -80,12 +78,10 @@ public class ReResource extends AbstractBaseEntity {
 	private int modifiedby;
 
 	@LastModifiedDate
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime modifiedon;
 
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "AUTOMODIFIEDON", columnDefinition = "datetime")
 	@DateTimeFormat
 	private LocalDateTime automodifiedon;

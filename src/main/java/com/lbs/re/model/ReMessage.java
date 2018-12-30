@@ -12,14 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.lbs.re.util.converter.MessageTypeConverter;
-import com.lbs.re.util.converter.ResourceStateConverter;
-import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.lbs.re.util.EnumsV2.ResourceState;
 import com.lbs.re.util.EnumsV2.MessageType;
+import com.lbs.re.util.EnumsV2.ResourceState;
+import com.lbs.re.util.converter.MessageTypeConverter;
+import com.lbs.re.util.converter.ResourceStateConverter;
 
 @Entity
 @Table(name = "RE_MESSAGES", indexes = { @Index(name = "I_MESSAGES_CONSID", columnList = "CONS_ID,ID", unique = true) })
@@ -56,7 +55,6 @@ public class ReMessage extends AbstractBaseEntity {
 	@Column(name = "MODIFIEDBY", nullable = false)
 	private int modifiedby = 0;
 
-	@Type(type = "java.time.LocalDateTime")
 	@Column(name = "MODIFIEDON", columnDefinition = "datetime", nullable = false)
 	@DateTimeFormat
 	private LocalDateTime modifiedon;

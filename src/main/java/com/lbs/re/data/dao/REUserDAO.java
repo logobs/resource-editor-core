@@ -17,9 +17,9 @@
 
 package com.lbs.re.data.dao;
 
-import com.lbs.re.model.ReUser;
-
 import java.util.List;
+
+import com.lbs.re.model.ReUser;
 
 
 public interface REUserDAO extends BaseDAO<ReUser, Integer> {

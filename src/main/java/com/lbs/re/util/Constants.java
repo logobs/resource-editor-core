@@ -111,6 +111,9 @@ public final class Constants {
 	public static final String TEXT_COLON = ":";
 	public static final String TEXT_BLANK = " ";
 
+	public static final String EQUAL = "=";
+	public static final String BLANK = " ";
+
 	/**
 	 * String EMPTY_STRING
 	 */

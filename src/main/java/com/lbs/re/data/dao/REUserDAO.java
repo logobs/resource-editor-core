@@ -17,11 +17,9 @@
 
 package com.lbs.re.data.dao;
 
-import java.util.List;
-
 import com.lbs.re.model.ReUser;
 
 
 public interface REUserDAO extends BaseDAO<ReUser, Integer> {
-    List<ReUser> getUserListByUsername(String userName);
+	ReUser getUserListByUsername(String userName);
 }

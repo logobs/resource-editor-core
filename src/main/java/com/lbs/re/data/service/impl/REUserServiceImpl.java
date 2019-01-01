@@ -17,13 +17,12 @@
 
 package com.lbs.re.data.service.impl;
 
-import com.lbs.re.data.dao.REUserDAO;
-import com.lbs.re.data.service.REUserService;
-import com.lbs.re.model.ReUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.lbs.re.data.dao.REUserDAO;
+import com.lbs.re.data.service.REUserService;
+import com.lbs.re.model.ReUser;
 
 @Service
 public class REUserServiceImpl extends BaseServiceImpl<ReUser, Integer> implements REUserService {
@@ -42,7 +41,7 @@ public class REUserServiceImpl extends BaseServiceImpl<ReUser, Integer> implemen
     }
 
     @Override
-    public List<ReUser> getUserListByUsername(String userName) {
+	public ReUser getUserListByUsername(String userName) {
         return dao.getUserListByUsername(userName);
     }
 }

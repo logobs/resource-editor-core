@@ -17,13 +17,12 @@
 
 package com.lbs.re.data.service;
 
-import com.lbs.re.model.ReUser;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.lbs.re.model.ReUser;
 
 
 @Service
 public interface REUserService extends BaseService<ReUser, Integer> {
-    List<ReUser> getUserListByUsername(String userName);
+	ReUser getUserListByUsername(String userName);
 }

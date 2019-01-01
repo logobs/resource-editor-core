@@ -17,13 +17,12 @@
 
 package com.lbs.re.data.dao.impl;
 
-import com.lbs.re.data.dao.REUserDAO;
-import com.lbs.re.data.repository.REUserRepository;
-import com.lbs.re.model.ReUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import com.lbs.re.data.dao.REUserDAO;
+import com.lbs.re.data.repository.REUserRepository;
+import com.lbs.re.model.ReUser;
 
 @Component
 public class REUserDAOImpl extends BaseDAOImpl<ReUser, Integer> implements REUserDAO {
@@ -42,7 +41,7 @@ public class REUserDAOImpl extends BaseDAOImpl<ReUser, Integer> implements REUse
     }
 
     @Override
-    public List<ReUser> getUserListByUsername(String userName) {
+	public ReUser getUserListByUsername(String userName) {
         return repository.findByUsername(userName);
     }
 }

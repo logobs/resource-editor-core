@@ -6,12 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import com.lbs.re.data.repository.ResourceGroupRepository;
-import com.lbs.re.model.ReResourceGroup;
-import com.lbs.re.util.EnumsV2.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.PostConstruct;
+import com.lbs.re.util.EnumsV2.ResourceCase;
+import com.lbs.re.util.EnumsV2.ResourceState;
+import com.lbs.re.util.EnumsV2.ResourceType;
 
 public class SearchParam implements Serializable {
 
@@ -60,15 +57,11 @@ public class SearchParam implements Serializable {
     private static final List<String> resourceStateList = Arrays.asList(ResourceState.ACTIVE.toString(),
             ResourceState.INACTIVE.toString());
 
-    @Autowired
-    private ResourceGroupRepository resourceGroupRep;
-
-    @PostConstruct
-    private void init() {
-        for (ReResourceGroup group : resourceGroupRep.findAll()) {
-            resourceGroupList.add(group.getName());
-        }
-    }
+	/*
+	 * refactor
+	 * @Autowired private ResourceGroupRepository resourceGroupRep;
+	 * @PostConstruct private void init() { for (ReResourceGroup group : resourceGroupRep.findAll()) { resourceGroupList.add(group.getName()); } }
+	 */
 
     public SearchParam() {
     }

@@ -15,7 +15,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "RE_RESOURCEGROUP")
 @EntityListeners(AuditingEntityListener.class)
-public class ReResourceGroup extends AbstractBaseEntity{
+public class ReResourceGroup {
+
+	@Id
+	@Column(name = "ID", nullable = false, updatable = false, unique = true)
+	private String ID;
 
 	@Column(name = "NAME", nullable = false, unique = true)
 	private String name;

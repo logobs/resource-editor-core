@@ -1,7 +1,5 @@
 package com.lbs.re.model;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -13,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.lbs.re.util.EnumsV2.MessageType;
 import com.lbs.re.util.EnumsV2.ResourceState;
@@ -51,13 +48,6 @@ public class ReMessage extends AbstractBaseEntity {
 
 	@Column(name = "LISTID", nullable = false)
 	private int listid = 0;
-
-	@Column(name = "MODIFIEDBY", nullable = false)
-	private int modifiedby = 0;
-
-	@Column(name = "MODIFIEDON", columnDefinition = "datetime", nullable = false)
-	@DateTimeFormat
-	private LocalDateTime modifiedon;
 
 	@Column(name = "[MODULE]", columnDefinition = "nvarchar(20)", nullable = false)
 	private String module = "";
@@ -135,22 +125,6 @@ public class ReMessage extends AbstractBaseEntity {
 
 	public final void setListid(int listid) {
 		this.listid = listid;
-	}
-
-	public final int getModifiedby() {
-		return this.modifiedby;
-	}
-
-	public final void setModifiedby(int modifiedby) {
-		this.modifiedby = modifiedby;
-	}
-
-	public final LocalDateTime getModifiedon() {
-		return this.modifiedon;
-	}
-
-	public final void setModifiedon(LocalDateTime modifiedon) {
-		this.modifiedon = modifiedon;
 	}
 
 	public final String getModule() {

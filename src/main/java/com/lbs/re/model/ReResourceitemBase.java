@@ -11,10 +11,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.lbs.re.util.EnumsV2.OwnerProduct;
 import com.lbs.re.util.EnumsV2.ResourceCase;
@@ -36,13 +34,6 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	@Column(name = "AUTOMODIFIEDON", columnDefinition = "datetime")
 	private LocalDateTime automodifiedon;
 
-	@Column(name = "CREATEDBY")
-	private Integer createdby;
-
-	@CreatedDate
-	@Column(name = "CREATEDON", columnDefinition = "datetime")
-	private LocalDateTime createdon;
-
 	@Column(name = "INFO", columnDefinition = "nvarchar(20)")
 	private String info;
 
@@ -51,14 +42,6 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 
 	@Column(name = "LOCALIZATIONAFFECTED")
 	private Integer localizationaffected;
-
-	@Column(name = "MODIFIEDBY")
-	private Integer modifiedby;
-
-	@LastModifiedDate
-	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
-	@DateTimeFormat
-	private LocalDateTime modifiedon;
 
 	@Column(name = "ORDERNR")
 	private Integer ordernr;
@@ -114,22 +97,6 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 		this.automodifiedon = automodifiedon;
 	}
 
-	public final Integer getCreatedby() {
-		return createdby;
-	}
-
-	public final void setCreatedby(Integer createdby) {
-		this.createdby = createdby;
-	}
-
-	public final LocalDateTime getCreatedon() {
-		return createdon;
-	}
-
-	public final void setCreatedon(LocalDateTime createdon) {
-		this.createdon = createdon;
-	}
-
 	public final String getInfo() {
 		return info;
 	}
@@ -152,22 +119,6 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 
 	public final void setLocalizationaffected(Integer localizationaffected) {
 		this.localizationaffected = localizationaffected;
-	}
-
-	public final Integer getModifiedby() {
-		return modifiedby;
-	}
-
-	public final void setModifiedby(Integer modifiedby) {
-		this.modifiedby = modifiedby;
-	}
-
-	public final LocalDateTime getModifiedon() {
-		return modifiedon;
-	}
-
-	public final void setModifiedon(LocalDateTime modifiedon) {
-		this.modifiedon = modifiedon;
 	}
 
 	public final Integer getOrdernr() {
@@ -278,7 +229,7 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	@PreUpdate
 	protected void beforeInsertOrUpdate() {
 		automodifiedon = LocalDateTime.now();
-		modifiedon = LocalDateTime.now();
+		setModifiedon(LocalDateTime.now());
 	}
 
 }

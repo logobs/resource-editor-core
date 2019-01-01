@@ -1,42 +1,17 @@
 package com.lbs.re.model;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class ReLanguageTable extends AbstractBaseEntity{
 
-	@CreatedBy
-	@Column(name = "CREATEDBY")
-	private Integer createdby;
-
-	@CreatedDate
-	@Column(name = "CREATEDON", columnDefinition = "datetime")
-	@DateTimeFormat
-	private LocalDateTime createdon;
-
 	@Column(name = "INFO", columnDefinition = "nvarchar(20)")
 	private String info;
-
-	@LastModifiedBy
-	@Column(name = "MODIFIEDBY")
-	private Integer modifiedby;
-
-	@LastModifiedDate
-	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
-	@DateTimeFormat
-	private LocalDateTime modifiedon;
 
 	@Column(name = "RESOURCEITEMREF")
 	private Integer resourceitemref;
@@ -50,44 +25,12 @@ public class ReLanguageTable extends AbstractBaseEntity{
 	@Column(name = "[VERSION]")
 	private Integer version;
 
-	public final Integer getCreatedby() {
-		return createdby;
-	}
-
-	public final void setCreatedby(Integer createdby) {
-		this.createdby = createdby;
-	}
-
-	public final LocalDateTime getCreatedon() {
-		return createdon;
-	}
-
-	public final void setCreatedon(LocalDateTime createdon) {
-		this.createdon = createdon;
-	}
-
 	public final String getInfo() {
 		return info;
 	}
 
 	public final void setInfo(String info) {
 		this.info = info;
-	}
-
-	public final Integer getModifiedby() {
-		return modifiedby;
-	}
-
-	public final void setModifiedby(Integer modifiedby) {
-		this.modifiedby = modifiedby;
-	}
-
-	public final LocalDateTime getModifiedon() {
-		return modifiedon;
-	}
-
-	public final void setModifiedon(LocalDateTime modifiedon) {
-		this.modifiedon = modifiedon;
 	}
 
 	public final Integer getResourceitemref() {

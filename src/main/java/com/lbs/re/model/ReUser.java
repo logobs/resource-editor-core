@@ -1,7 +1,6 @@
 package com.lbs.re.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -15,12 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.lbs.re.util.EnumsV2.UserLanguage;
 import com.lbs.re.util.EnumsV2.UserLayoutType;
@@ -56,15 +50,6 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 
 	@Column(name = "BGBGACCESSRIGHTS")
 	private Integer bgbgaccessrights = 0;
-
-	@CreatedBy
-	@Column(name = "CREATEDBY")
-	private Integer createdby;
-
-	@CreatedDate
-	@Column(name = "CREATEDON", columnDefinition = "datetime")
-	@DateTimeFormat
-	private LocalDateTime createdon;
 
 	@Column(name = "DEDEACCESSRIGHTS")
 	private Integer dedeaccessrights = 0;
@@ -111,15 +96,6 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 
 	@Column(name = "KAGEACCESSRIGHTS")
 	private Integer kageaccessrights = 0;
-
-	@LastModifiedBy
-	@Column(name = "MODIFIEDBY")
-	private Integer modifiedby;
-
-	@LastModifiedDate
-	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
-	@DateTimeFormat
-	private LocalDateTime modifiedon;
 
 	@Column(name = "NAME", columnDefinition = "nvarchar(40)")
 	private String name = "";
@@ -246,22 +222,6 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 		this.bgbgaccessrights = bgbgaccessrights;
 	}
 
-	public Integer getCreatedby() {
-		return this.createdby;
-	}
-
-	public void setCreatedby(Integer createdby) {
-		this.createdby = createdby;
-	}
-
-	public LocalDateTime getCreatedon() {
-		return this.createdon;
-	}
-
-	public void setCreatedon(LocalDateTime createdon) {
-		this.createdon = createdon;
-	}
-
 	public Integer getDedeaccessrights() {
 		return this.dedeaccessrights;
 	}
@@ -372,22 +332,6 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 
 	public void setKageaccessrights(Integer kageaccessrights) {
 		this.kageaccessrights = kageaccessrights;
-	}
-
-	public Integer getModifiedby() {
-		return this.modifiedby;
-	}
-
-	public void setModifiedby(Integer modifiedby) {
-		this.modifiedby = modifiedby;
-	}
-
-	public LocalDateTime getModifiedon() {
-		return this.modifiedon;
-	}
-
-	public void setModifiedon(LocalDateTime modifiedon) {
-		this.modifiedon = modifiedon;
 	}
 
 	public String getName() {

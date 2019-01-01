@@ -22,8 +22,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -65,22 +63,6 @@ public class ReResource extends AbstractBaseEntity {
 
 	@Column(name = "SLIST")
 	private int slist;
-
-	@Column(name = "CREATEDBY")
-	private int createdby;
-
-	@CreatedDate
-	@Column(name = "CREATEDON", columnDefinition = "datetime")
-	@DateTimeFormat
-	private LocalDateTime createdon;
-
-	@Column(name = "MODIFIEDBY")
-	private int modifiedby;
-
-	@LastModifiedDate
-	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
-	@DateTimeFormat
-	private LocalDateTime modifiedon;
 
 	@Column(name = "AUTOMODIFIEDON", columnDefinition = "datetime")
 	@DateTimeFormat
@@ -149,38 +131,6 @@ public class ReResource extends AbstractBaseEntity {
 
 	public final void setSlist(int slist) {
 		this.slist = slist;
-	}
-
-	public final int getCreatedby() {
-		return createdby;
-	}
-
-	public final void setCreatedby(int createdby) {
-		this.createdby = createdby;
-	}
-
-	public final LocalDateTime getCreatedon() {
-		return createdon;
-	}
-
-	public final void setCreatedon(LocalDateTime createdon) {
-		this.createdon = createdon;
-	}
-
-	public final int getModifiedby() {
-		return modifiedby;
-	}
-
-	public final void setModifiedby(int modifiedby) {
-		this.modifiedby = modifiedby;
-	}
-
-	public final LocalDateTime getModifiedon() {
-		return modifiedon;
-	}
-
-	public final void setModifiedon(LocalDateTime modifiedon) {
-		this.modifiedon = modifiedon;
 	}
 
 	public final LocalDateTime getAutomodifiedon() {
@@ -269,7 +219,7 @@ public class ReResource extends AbstractBaseEntity {
 	@PreUpdate
 	protected void beforeInsertOrUpdate() {
 		automodifiedon = LocalDateTime.now();
-		modifiedon = LocalDateTime.now();
+		setModifiedon(LocalDateTime.now());
 	}
 
 	public ReResource copyResource() {

@@ -1,7 +1,6 @@
 package com.lbs.re.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "RE_STANDARD", indexes = { @Index(name = "I_STANDARD_INFO", columnList = "INFO,ID", unique = true),
@@ -37,24 +33,8 @@ public class ReStandard extends AbstractBaseEntity implements Serializable {
 	@Column(name = "RESOURCEITEMREF")
 	private Integer resourceitemref;
 
-	@Column(name = "CREATEDBY")
-	private Integer createdby;
-
-	@CreatedDate
-	@Column(name = "CREATEDON", columnDefinition = "datetime")
-	@DateTimeFormat
-	private LocalDateTime createdon;
-
 	@Column(name = "INFO", columnDefinition = "nvarchar(20)")
 	private String info;
-
-	@Column(name = "MODIFIEDBY")
-	private Integer modifiedby;
-
-	@LastModifiedDate
-	@Column(name = "MODIFIEDON", columnDefinition = "datetime")
-	@DateTimeFormat
-	private LocalDateTime modifiedon;
 
 	@Column(name = "VERSION")
 	private Integer version;
@@ -83,44 +63,12 @@ public class ReStandard extends AbstractBaseEntity implements Serializable {
 		this.resourceitemref = resourceitemref;
 	}
 
-	public Integer getCreatedby() {
-		return createdby;
-	}
-
-	public void setCreatedby(Integer createdby) {
-		this.createdby = createdby;
-	}
-
-	public LocalDateTime getCreatedon() {
-		return createdon;
-	}
-
-	public void setCreatedon(LocalDateTime createdon) {
-		this.createdon = createdon;
-	}
-
 	public String getInfo() {
 		return info;
 	}
 
 	public void setInfo(String info) {
 		this.info = info;
-	}
-
-	public Integer getModifiedby() {
-		return modifiedby;
-	}
-
-	public void setModifiedby(Integer modifiedby) {
-		this.modifiedby = modifiedby;
-	}
-
-	public LocalDateTime getModifiedon() {
-		return modifiedon;
-	}
-
-	public void setModifiedon(LocalDateTime modifiedon) {
-		this.modifiedon = modifiedon;
 	}
 
 	public Integer getVersion() {

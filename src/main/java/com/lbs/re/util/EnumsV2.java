@@ -327,6 +327,16 @@ public class EnumsV2 {
 			}
 			return "";
 		}
+
+		public static class Constants {
+
+			public static final String ADMINISTRATOR = "ADMINISTRATOR";
+			public static final String PROGRAMMER = "PROGRAMMER";
+
+			private Constants() {
+				// Constants private constructor
+			}
+		}
 	}
 
 	public interface IEnumsV2 extends ResourceEditorLocalizerWrapper {

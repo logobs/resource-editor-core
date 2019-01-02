@@ -33,6 +33,14 @@ public class ReResourceGroup {
 	@OneToMany(mappedBy = "resgroup")
 	private List<ReMessage> messageList = new ArrayList<ReMessage>();
 
+	public String getID() {
+		return ID;
+	}
+
+	public void setID(String iD) {
+		ID = iD;
+	}
+
 	public String getName() {
 		return name;
 	}

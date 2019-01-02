@@ -126,6 +126,9 @@ public final class Constants {
 	public static final String RESOURCEEDITOR_DATE_FORMAT = "dd-MM-yy";
 	public static final String RESOURCEEDITOR_DB_DATE_FORMAT = "dd/MM/yy HH:mm:ss";
 
+	public static final int READ = 1;
+	public static final int WRITE = 2;
+	public static final int DELETE = 4;
 
 	private Constants() {
 	}

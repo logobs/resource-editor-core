@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.lbs.re.routing.DatabaseEnvironment;
 import com.lbs.re.util.EnumsV2.UserLanguage;
 import com.lbs.re.util.EnumsV2.UserLayoutType;
 import com.lbs.re.util.EnumsV2.UserType;
@@ -153,6 +154,8 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 
 	@Column(name = "ZHCNACCESSRIGHTS")
 	private Integer zhcnaccessrights = 0;
+
+	private transient DatabaseEnvironment preferredDb;
 
 	public ReUser() {
 		/**/
@@ -484,6 +487,14 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 
 	public void setZhcnaccessrights(Integer zhcnaccessrights) {
 		this.zhcnaccessrights = zhcnaccessrights;
+	}
+
+	public DatabaseEnvironment getPreferredDb() {
+		return preferredDb;
+	}
+
+	public void setPreferredDb(DatabaseEnvironment preferredDb) {
+		this.preferredDb = preferredDb;
 	}
 
 	public boolean isPersisted() {

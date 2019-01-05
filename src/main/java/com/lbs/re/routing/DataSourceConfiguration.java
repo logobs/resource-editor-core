@@ -46,12 +46,12 @@ public class DataSourceConfiguration {
 		return DataSourceBuilder.create().build();
 	}
 
-	// @Bean
-	// @ConfigurationProperties(prefix = "app.customer.testing.datasource")
-	// public DataSource customerTestingDataSource() {
-	// return DataSourceBuilder.create().build();
-	// }
-	//
+	@Bean
+	@ConfigurationProperties(prefix = "app.customer.test")
+	public DataSource customerTestingDataSource() {
+		return DataSourceBuilder.create().build();
+	}
+
 	// @Bean
 	// @ConfigurationProperties(prefix = "app.customer.production.datasource")
 	// public DataSource customerProductionDataSource() {
@@ -68,9 +68,9 @@ public class DataSourceConfiguration {
 	@Primary
 	public DataSource customerDataSource() {
 		DataSourceRouter router = new DataSourceRouter();
-
 		final HashMap<Object, Object> map = new HashMap<>(3);
 		map.put(DatabaseEnvironment.JPLATFORM, customerDevelopmentDataSource());
+		map.put(DatabaseEnvironment.TIGER, customerTestingDataSource());
 		router.setTargetDataSources(map);
 		return router;
 	}

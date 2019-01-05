@@ -1,19 +1,21 @@
 package com.lbs.re.routing;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-
-import com.lbs.re.model.ReUser;
 
 public class DataSourceRouter extends AbstractRoutingDataSource {
 
-	private ReUser reUser;
+	/*
+	 * private DatabaseEnvironment preferredDatabase; public DatabaseEnvironment getPreferredDatabase() { return preferredDatabase; } public void
+	 * setPreferredDatabase(DatabaseEnvironment preferredDatabase) { this.preferredDatabase = preferredDatabase; }
+	 */
 
-	public void setREUser(ReUser reUser) {
-		this.reUser = reUser;
-	}
+	@Autowired
+	private SessionDatabase db;
 
 	@Override
 	protected Object determineCurrentLookupKey() {
-		return reUser.getPreferredDb();
+		// return preferredDatabase;
+		return db.getPreferredDb();
 	}
 }

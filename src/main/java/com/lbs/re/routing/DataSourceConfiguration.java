@@ -25,7 +25,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages = { "com.lbs.re.data.repository" }, entityManagerFactoryRef = "customerEntityManager", transactionManagerRef = "customerTransactionManager")
+@EnableJpaRepositories(basePackages = { "com.lbs.re.data.repository" }, entityManagerFactoryRef = "appEntityManager", transactionManagerRef = "appTransactionManager")
 @ComponentScan(basePackages = { "com.lbs.re.data.dao" })
 @EnableTransactionManagement
 public class DataSourceConfiguration {
@@ -35,29 +35,22 @@ public class DataSourceConfiguration {
 
 	@Bean
 	@Primary
-	@ConfigurationProperties("app.customer.jpa")
-	public JpaProperties customerJpaProperties() {
+	@ConfigurationProperties("app.connection.jpa")
+	public JpaProperties appJpaProperties() {
 		return new JpaProperties();
 	}
 
 	@Bean
-	@ConfigurationProperties(prefix = "app.customer.development")
-	public DataSource customerDevelopmentDataSource() {
+	@ConfigurationProperties(prefix = "app.jplatform.connection")
+	public DataSource jplatformDataSource() {
 		return DataSourceBuilder.create().build();
 	}
 
 	@Bean
-	@ConfigurationProperties(prefix = "app.customer.test")
-	public DataSource customerTestingDataSource() {
+	@ConfigurationProperties(prefix = "app.tiger.connection")
+	public DataSource tigerDataSource() {
 		return DataSourceBuilder.create().build();
 	}
-
-	// @Bean
-	// @ConfigurationProperties(prefix = "app.customer.production.datasource")
-	// public DataSource customerProductionDataSource() {
-	// return DataSourceBuilder.create().build();
-	// }
-	//
 
 	/**
 	 * Adds all available datasources to datasource map.
@@ -66,31 +59,31 @@ public class DataSourceConfiguration {
 	 */
 	@Bean
 	@Primary
-	public DataSource customerDataSource() {
+	public DataSource appDataSource() {
 		DataSourceRouter router = new DataSourceRouter();
 		final HashMap<Object, Object> map = new HashMap<>(3);
-		map.put(DatabaseEnvironment.JPLATFORM, customerDevelopmentDataSource());
-		map.put(DatabaseEnvironment.TIGER, customerTestingDataSource());
+		map.put(DatabaseEnvironment.JPLATFORM, jplatformDataSource());
+		map.put(DatabaseEnvironment.TIGER, tigerDataSource());
 		router.setTargetDataSources(map);
 		return router;
 	}
 
 	@Bean
 	@Primary
-	public LocalContainerEntityManagerFactoryBean customerEntityManager(final JpaProperties customerJpaProperties) {
-		EntityManagerFactoryBuilder builder = createEntityManagerFactoryBuilder(customerJpaProperties);
-		return builder.dataSource(customerDataSource()).packages("com.lbs.re.model", "com.lbs.re.util").persistenceUnit("customerEntityManager").build();
+	public LocalContainerEntityManagerFactoryBean appEntityManager(final JpaProperties appJpaProperties) {
+		EntityManagerFactoryBuilder builder = createEntityManagerFactoryBuilder(appJpaProperties);
+		return builder.dataSource(appDataSource()).packages("com.lbs.re.model", "com.lbs.re.util").persistenceUnit("appEntityManager").build();
 	}
 
 	@Bean
 	@Primary
-	public JpaTransactionManager customerTransactionManager(@Qualifier("customerEntityManager") final EntityManagerFactory factory) {
+	public JpaTransactionManager appTransactionManager(@Qualifier("appEntityManager") final EntityManagerFactory factory) {
 		return new JpaTransactionManager(factory);
 	}
 
-	private EntityManagerFactoryBuilder createEntityManagerFactoryBuilder(JpaProperties customerJpaProperties) {
-		JpaVendorAdapter jpaVendorAdapter = createJpaVendorAdapter(customerJpaProperties);
-		return new EntityManagerFactoryBuilder(jpaVendorAdapter, customerJpaProperties.getProperties(), this.persistenceUnitManager);
+	private EntityManagerFactoryBuilder createEntityManagerFactoryBuilder(JpaProperties appJpaProperties) {
+		JpaVendorAdapter jpaVendorAdapter = createJpaVendorAdapter(appJpaProperties);
+		return new EntityManagerFactoryBuilder(jpaVendorAdapter, appJpaProperties.getProperties(), this.persistenceUnitManager);
 	}
 
 	private JpaVendorAdapter createJpaVendorAdapter(JpaProperties jpaProperties) {

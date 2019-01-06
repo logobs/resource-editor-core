@@ -132,7 +132,7 @@ public class Enums {
 		BASE("Base"), //
 		CONTROL_FILE("controlFile.txt"), //
 		FINISH_FILE("finishFile.txt"), //
-		CONFIG_PROPERTIES("config.properties");
+		CONFIG_PROPERTIES("application.properties");
 
 		private String name;
 

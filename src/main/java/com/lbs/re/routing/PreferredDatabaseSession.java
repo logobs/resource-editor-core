@@ -8,7 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class SessionDatabase implements Serializable {
+public class PreferredDatabaseSession implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private DatabaseEnvironment preferredDb;
 

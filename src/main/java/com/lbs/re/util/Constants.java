@@ -130,6 +130,9 @@ public final class Constants {
 	public static final int WRITE = 2;
 	public static final int DELETE = 4;
 
+	public static final String JPLATFORM = "jplatform";
+	public static final String TIGER = "tiger";
+
 	private Constants() {
 	}
 

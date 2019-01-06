@@ -6,7 +6,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 public class DataSourceRouter extends AbstractRoutingDataSource {
 
 	@Autowired
-	private SessionDatabase db;
+	private PreferredDatabaseSession db;
 
 	@Override
 	protected Object determineCurrentLookupKey() {

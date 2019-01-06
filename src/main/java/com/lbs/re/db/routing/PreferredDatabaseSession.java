@@ -1,4 +1,4 @@
-package com.lbs.re.routing;
+package com.lbs.re.db.routing;
 
 import java.io.Serializable;
 

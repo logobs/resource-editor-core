@@ -1,4 +1,4 @@
-package com.lbs.re.routing;
+package com.lbs.re.db.routing;
 
 import java.util.HashMap;
 
@@ -33,13 +33,11 @@ public class DataSourceConfiguration {
 	@Autowired(required = false)
 	private PersistenceUnitManager persistenceUnitManager;
 
-	@Bean
-	@Primary
-	@ConfigurationProperties("app.connection.jpa")
-	public JpaProperties appJpaProperties() {
-		return new JpaProperties();
-	}
-
+	/**
+	 * Available data sources
+	 *
+	 *
+	 */
 	@Bean
 	@ConfigurationProperties(prefix = "app.jplatform.connection")
 	public DataSource jplatformDataSource() {
@@ -66,6 +64,13 @@ public class DataSourceConfiguration {
 		map.put(DatabaseEnvironment.TIGER, tigerDataSource());
 		router.setTargetDataSources(map);
 		return router;
+	}
+
+	@Bean
+	@Primary
+	@ConfigurationProperties("app.connection.jpa")
+	public JpaProperties appJpaProperties() {
+		return new JpaProperties();
 	}
 
 	@Bean

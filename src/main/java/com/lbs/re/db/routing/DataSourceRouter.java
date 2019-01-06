@@ -1,4 +1,4 @@
-package com.lbs.re.routing;
+package com.lbs.re.db.routing;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;

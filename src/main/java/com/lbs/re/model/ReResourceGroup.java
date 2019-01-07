@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class ReResourceGroup {
 
 	@Id
-	@Column(name = "ID", nullable = false, updatable = false, unique = true)
+	@Column(name = "[ID]", columnDefinition = "nvarchar(10)", nullable = false, updatable = false, unique = true)
 	private String ID;
 
 	@Column(name = "NAME", nullable = false, unique = true)

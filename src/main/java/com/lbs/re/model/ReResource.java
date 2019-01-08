@@ -2,9 +2,7 @@ package com.lbs.re.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,8 +12,6 @@ import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -44,7 +40,7 @@ public class ReResource extends AbstractBaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "RESOURCENR")
-	private int resourceNr;
+	private Integer resourceNr;
 
 	@Column(name = "DESCRIPTION", columnDefinition = "nvarchar(128)")
 	private String description;
@@ -85,11 +81,11 @@ public class ReResource extends AbstractBaseEntity {
 	@Column(name = "RESOURCECATEGORY")
 	private int resourcecategory;
 
-	public final int getResourcenr() {
+	public final Integer getResourcenr() {
 		return resourceNr;
 	}
 
-	public final void setResourcenr(int resourceNr) {
+	public final void setResourcenr(Integer resourceNr) {
 		this.resourceNr = resourceNr;
 	}
 
@@ -200,21 +196,6 @@ public class ReResource extends AbstractBaseEntity {
 	public void setReResourceitems(List<ReResourceitem> reResourceitems) {
 		this.reResourceitems = reResourceitems;
 	}
-
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinTable(name = "RE_VERSIONASGS", joinColumns = {
-			@JoinColumn(name = "RESOURCEID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "VERSIONID", nullable = false, updatable = true, insertable = true) })
-	private Set<ReProjectVersion> reProjectVersion = new HashSet<>(0);
-
-	public Set<ReProjectVersion> getReProjectVersion() {
-		return reProjectVersion;
-	}
-
-	public void setReProjectVersion(Set<ReProjectVersion> reProjectVersion) {
-		this.reProjectVersion = reProjectVersion;
-	}
-
 	@PrePersist
 	@PreUpdate
 	protected void beforeInsertOrUpdate() {
@@ -233,9 +214,6 @@ public class ReResource extends AbstractBaseEntity {
 		copiedResource.setActive(active);
 		copiedResource.setOwnerproduct(ownerproduct);
 		copiedResource.setResourcecategory(resourcecategory);
-		for (ReProjectVersion version : getReProjectVersion()) {
-			copiedResource.getReProjectVersion().add(version);
-		}
 		return copiedResource;
 	}
 }

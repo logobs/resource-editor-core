@@ -72,7 +72,7 @@ public class ReResource extends AbstractBaseEntity {
 
 	@Convert(converter = ResourceStateConverter.class)
 	@Column(name = "ACTIVE")
-	private ResourceState active;
+	private ResourceState active = ResourceState.ACTIVE;
 
 	@Convert(converter = OwnerProductConverter.class)
 	@Column(name = "OWNERPRODUCT")

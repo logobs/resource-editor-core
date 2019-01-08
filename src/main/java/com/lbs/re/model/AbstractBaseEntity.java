@@ -22,7 +22,7 @@ public class AbstractBaseEntity implements Serializable, HasLogger {
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id = 0;
 
 	@LastModifiedBy

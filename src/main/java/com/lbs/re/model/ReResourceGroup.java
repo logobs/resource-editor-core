@@ -21,9 +21,14 @@ public class ReResourceGroup {
 	private String name;
 
 	/*
-	 * @OneToMany(mappedBy = "resourcegroup") private List<ReResource> resourceList = new ArrayList<ReResource>();
-	 * @OneToMany(mappedBy = "defaultresourcegroup") private List<ReUser> userList = new ArrayList<ReUser>();
-	 * @OneToMany(mappedBy = "resgroup") private List<ReMessage> messageList = new ArrayList<ReMessage>();
+	 * @OneToMany(mappedBy = "resourcegroup") private List<ReResource> resourceList
+	 * = new ArrayList<ReResource>();
+	 * 
+	 * @OneToMany(mappedBy = "defaultresourcegroup") private List<ReUser> userList =
+	 * new ArrayList<ReUser>();
+	 * 
+	 * @OneToMany(mappedBy = "resgroup") private List<ReMessage> messageList = new
+	 * ArrayList<ReMessage>();
 	 */
 
 	public String getID() {
@@ -43,9 +48,13 @@ public class ReResourceGroup {
 	}
 
 	/*
-	 * public List<ReResource> getResourceList() { return resourceList; } public void setResourceList(List<ReResource> resourceList) { this.resourceList = resourceList; } public
-	 * List<ReUser> getUserList() { return userList; } public void setUserList(List<ReUser> userList) { this.userList = userList; } public List<ReMessage> getMessageList() { return
-	 * messageList; } public void setMessageList(List<ReMessage> messageList) { this.messageList = messageList; }
+	 * public List<ReResource> getResourceList() { return resourceList; } public
+	 * void setResourceList(List<ReResource> resourceList) { this.resourceList =
+	 * resourceList; } public List<ReUser> getUserList() { return userList; } public
+	 * void setUserList(List<ReUser> userList) { this.userList = userList; } public
+	 * List<ReMessage> getMessageList() { return messageList; } public void
+	 * setMessageList(List<ReMessage> messageList) { this.messageList = messageList;
+	 * }
 	 */
 
 	@Override
@@ -55,6 +64,7 @@ public class ReResourceGroup {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -67,15 +77,16 @@ public class ReResourceGroup {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
 		ReResourceGroup other = (ReResourceGroup) obj;
 		if (this.getID().equals(other.getID()))
 			return true;
-		if (obj == null)
-			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		return false;

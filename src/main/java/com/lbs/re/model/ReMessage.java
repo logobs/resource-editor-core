@@ -26,7 +26,7 @@ public class ReMessage extends AbstractBaseEntity {
 
 	@Convert(converter = ResourceStateConverter.class)
 	@Column(name = "ACTIVE")
-	private ResourceState active;
+	private ResourceState active = ResourceState.ACTIVE;
 
 	@Column(name = "BUTTONS", nullable = false)
 	private int buttons = 0;

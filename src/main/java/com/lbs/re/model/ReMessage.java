@@ -56,7 +56,7 @@ public class ReMessage extends AbstractBaseEntity {
 	@Column(name = "MTYPE", nullable = false)
 	private MessageType mtype = MessageType.ERROR;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "RESGROUP", nullable = false)
 	private ReResourceGroup resgroup;
 

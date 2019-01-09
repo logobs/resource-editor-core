@@ -240,6 +240,58 @@ public class EnumsV2 {
 		}
 	}
 
+	public enum MessageButton {
+
+		OK(1), CANCEL(2), YES(4), NO(8), SAVE(16);
+
+		private final int buttonIntValue;
+
+		private MessageButton(int buttonIntValue) {
+			this.buttonIntValue = buttonIntValue;
+		}
+
+		public int getButtonIntValue() {
+			return buttonIntValue;
+		}
+
+		public static MessageButton findMessageButton(int buttonIntValue) {
+			switch (buttonIntValue) {
+			case 1:
+				return OK;
+			case 2:
+				return CANCEL;
+			case 4:
+				return YES;
+			case 8:
+				return NO;
+			case 16:
+				return SAVE;
+			default:
+				return null;
+			}
+		}
+
+		@Override
+		public String toString() {
+			if (buttonIntValue == 1) {
+				return "OK";
+			}
+			if (buttonIntValue == 2) {
+				return "Cancel";
+			}
+			if (buttonIntValue == 4) {
+				return "Yes";
+			}
+			if (buttonIntValue == 8) {
+				return "No";
+			}
+			if (buttonIntValue == 16) {
+				return "Save";
+			}
+			return "";
+		}
+	}
+
 	public enum OwnerProduct {
 
 		INFRASTRUCTURE(-1), APPLICATION(0);

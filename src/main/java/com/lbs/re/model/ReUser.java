@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -62,7 +61,7 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 	@Column(name = "DEFAULTORIENTATION", columnDefinition = "nvarchar(8)")
 	private UserLayoutType defaultorientation = UserLayoutType.V;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "DEFAULTRESOURCEGROUP")
 	private ReResourceGroup defaultresourcegroup;
 

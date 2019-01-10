@@ -1,14 +1,14 @@
 package com.lbs.re.data.service.impl.language;
 
-import com.lbs.re.data.dao.language.RussianruDAO;
-import com.lbs.re.data.service.impl.BaseServiceImpl;
-import com.lbs.re.data.service.language.RussianruService;
-import com.lbs.re.model.languages.ReRussianru;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lbs.re.data.dao.language.RussianruDAO;
+import com.lbs.re.data.service.language.RussianruService;
+import com.lbs.re.model.languages.ReRussianru;
+
 @Service
-public class RussianruServiceImpl extends BaseServiceImpl<ReRussianru, Integer> implements RussianruService {
+public class RussianruServiceImpl extends LanguageServiceImpl<ReRussianru, Integer> implements RussianruService {
     /**
      * long serialVersionUID
      */

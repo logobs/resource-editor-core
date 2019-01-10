@@ -17,18 +17,19 @@
 
 package com.lbs.re.data.dao.impl;
 
+import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Component;
+
 import com.lbs.re.data.dao.BaseDAO;
-import com.lbs.re.data.repository.BaseRepository;
+import com.lbs.re.data.unscan.BaseRepository;
 import com.lbs.re.exception.localized.GeneralLocalizedException;
 import com.lbs.re.exception.localized.LocalizedException;
 import com.lbs.re.exception.localized.UniqueConstraintException;
 import com.lbs.re.model.AbstractBaseEntity;
 import com.lbs.re.util.HasLogger;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Component;
-
-import java.io.Serializable;
-import java.util.List;
 
 @Component
 public class BaseDAOImpl<T extends AbstractBaseEntity, ID extends Serializable> implements BaseDAO<T, ID>, HasLogger {
@@ -44,7 +45,11 @@ public class BaseDAOImpl<T extends AbstractBaseEntity, ID extends Serializable> 
         this.repository = repository;
     }
 
-    @Override
+	public BaseRepository<T, ID> getRepository() {
+		return repository;
+	}
+
+	@Override
     public T getById(ID id) throws LocalizedException {
         try {
             return repository.findOne(id);

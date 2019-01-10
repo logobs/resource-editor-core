@@ -1,14 +1,14 @@
 package com.lbs.re.data.dao.impl.language;
 
-import com.lbs.re.data.dao.impl.BaseDAOImpl;
-import com.lbs.re.data.dao.language.GeorgiangeDAO;
-import com.lbs.re.data.repository.language.GeorgiangeRepository;
-import com.lbs.re.model.languages.ReGeorgiange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lbs.re.data.dao.language.GeorgiangeDAO;
+import com.lbs.re.data.repository.language.GeorgiangeRepository;
+import com.lbs.re.model.languages.ReGeorgiange;
+
 @Component
-public class GeorgiangeDAOImpl extends BaseDAOImpl<ReGeorgiange, Integer> implements GeorgiangeDAO {
+public class GeorgiangeDAOImpl extends LanguageDAOImpl<ReGeorgiange, Integer> implements GeorgiangeDAO {
     /**
      * long serialVersionUID
      */

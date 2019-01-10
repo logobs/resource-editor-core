@@ -1,9 +1,9 @@
 package com.lbs.re.data.service.language;
 
-import com.lbs.re.data.service.BaseService;
-import com.lbs.re.model.languages.ReFrenchfr;
 import org.springframework.stereotype.Service;
 
+import com.lbs.re.model.languages.ReFrenchfr;
+
 @Service
-public interface FrenchfrService extends BaseService<ReFrenchfr, Integer> {
+public interface FrenchfrService extends LanguageService<ReFrenchfr, Integer> {
 }

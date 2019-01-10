@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.EntityListeners;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -220,10 +218,6 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	public ReResourceitemBase() {
 		/* */
 	}
-
-	@ManyToOne
-	@JoinColumn(name = "resourceref", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-	public ReResource reResource;
 
 	@PrePersist
 	@PreUpdate

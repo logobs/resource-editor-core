@@ -1,14 +1,14 @@
 package com.lbs.re.data.dao.impl.language;
 
-import com.lbs.re.data.dao.impl.BaseDAOImpl;
-import com.lbs.re.data.dao.language.ArabicegDAO;
-import com.lbs.re.data.repository.language.ArabicegRepository;
-import com.lbs.re.model.languages.ReArabiceg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lbs.re.data.dao.language.ArabicegDAO;
+import com.lbs.re.data.repository.language.ArabicegRepository;
+import com.lbs.re.model.languages.ReArabiceg;
+
 @Component
-public class ArabicegDAOImpl extends BaseDAOImpl<ReArabiceg, Integer> implements ArabicegDAO {
+public class ArabicegDAOImpl extends LanguageDAOImpl<ReArabiceg, Integer> implements ArabicegDAO {
     /**
      * long serialVersionUID
      */

@@ -4,12 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.Index;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.lbs.re.model.languages.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -24,184 +22,173 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 
 	public static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
 
+	@Transient
+	private String turkishTr;
+
+	@Transient
+	private String albanianKv;
+
+	@Transient
+	private String arabicEg;
+
+	@Transient
+	private String arabicJo;
+
+	@Transient
+	private String arabicSa;
+
+	@Transient
+	private String azerbaijaniAz;
+
+	@Transient
+	private String bulguarianBg;
+
+	@Transient
+	private String englishUs;
+
+	@Transient
+	private String frenchFr;
+
+	@Transient
+	private String georgianGe;
+
+	@Transient
+	private String germanDe;
+
+	@Transient
+	private String persianIr;
+
+	@Transient
+	private String romanianRo;
+
+	@Transient
+	private String russianRu;
+
+	@Transient
+	private String turkmenTm;
+
 	public ReResourceitem() {
 		/* */
 	}
 
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReTurkishtr reTurkishtr;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReEnglishus reEnglishus;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReGermande reGermande;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private RePersianir rePersianir;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReAzerbaijaniaz reAzerbaijaniaz;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReBulgarianbg reBulgarianbg;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReRussianru reRussianru;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReRomanianro reRomanianro;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReGeorgiange reGeorgiange;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReArabicjo reArabicjo;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReFrenchfr reFrenchfr;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReAlbaniankv reAlbaniankv;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReTurkmentm reTurkmentm;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReArabiceg reArabiceg;
-
-	@OneToOne(mappedBy = "reResourceitem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReArabicsa reArabicsa;
-
-	@OneToOne(mappedBy = "resourceItem", orphanRemoval = true, fetch = FetchType.LAZY)
-	private ReStandard reStandard;
-
-	public ReTurkishtr getReTurkishtr() {
-		return reTurkishtr;
+	public String getTurkishTr() {
+		return turkishTr;
 	}
 
-	public void setReTurkishtr(ReTurkishtr reTurkishtr) {
-		this.reTurkishtr = reTurkishtr;
+	public void setTurkishTr(String turkishTr) {
+		this.turkishTr = turkishTr;
 	}
 
-	public ReEnglishus getReEnglishus() {
-		return reEnglishus;
+	public String getAlbanianKv() {
+		return albanianKv;
 	}
 
-	public void setReEnglishus(ReEnglishus reEnglishus) {
-		this.reEnglishus = reEnglishus;
+	public void setAlbanianKv(String albanianKv) {
+		this.albanianKv = albanianKv;
 	}
 
-	public ReGermande getReGermande() {
-		return reGermande;
+	public String getArabicEg() {
+		return arabicEg;
 	}
 
-	public void setReGermande(ReGermande reGermande) {
-		this.reGermande = reGermande;
+	public void setArabicEg(String arabicEg) {
+		this.arabicEg = arabicEg;
 	}
 
-	public RePersianir getRePersianir() {
-		return rePersianir;
+	public String getArabicJo() {
+		return arabicJo;
 	}
 
-	public void setRePersianir(RePersianir rePersianir) {
-		this.rePersianir = rePersianir;
+	public void setArabicJo(String arabicJo) {
+		this.arabicJo = arabicJo;
 	}
 
-	public ReAzerbaijaniaz getReAzerbaijaniaz() {
-		return reAzerbaijaniaz;
+	public String getArabicSa() {
+		return arabicSa;
 	}
 
-	public void setReAzerbaijaniaz(ReAzerbaijaniaz reAzerbaijaniaz) {
-		this.reAzerbaijaniaz = reAzerbaijaniaz;
+	public void setArabicSa(String arabicSa) {
+		this.arabicSa = arabicSa;
 	}
 
-	public ReBulgarianbg getReBulgarianbg() {
-		return reBulgarianbg;
+	public String getAzerbaijaniAz() {
+		return azerbaijaniAz;
 	}
 
-	public void setReBulgarianbg(ReBulgarianbg reBulgarianbg) {
-		this.reBulgarianbg = reBulgarianbg;
+	public void setAzerbaijaniAz(String azerbaijaniAz) {
+		this.azerbaijaniAz = azerbaijaniAz;
 	}
 
-	public ReRussianru getReRussianru() {
-		return reRussianru;
+	public String getBulguarianBg() {
+		return bulguarianBg;
 	}
 
-	public void setReRussianru(ReRussianru reRussianru) {
-		this.reRussianru = reRussianru;
+	public void setBulguarianBg(String bulguarianBg) {
+		this.bulguarianBg = bulguarianBg;
 	}
 
-	public ReRomanianro getReRomanianro() {
-		return reRomanianro;
+	public String getEnglishUs() {
+		return englishUs;
 	}
 
-	public void setReRomanianro(ReRomanianro reRomanianro) {
-		this.reRomanianro = reRomanianro;
+	public void setEnglishUs(String englishUs) {
+		this.englishUs = englishUs;
 	}
 
-	public ReGeorgiange getReGeorgiange() {
-		return reGeorgiange;
+	public String getFrenchFr() {
+		return frenchFr;
 	}
 
-	public void setReGeorgiange(ReGeorgiange reGeorgiange) {
-		this.reGeorgiange = reGeorgiange;
+	public void setFrenchFr(String frenchFr) {
+		this.frenchFr = frenchFr;
 	}
 
-	public ReArabicjo getReArabicjo() {
-		return reArabicjo;
+	public String getGeorgianGe() {
+		return georgianGe;
 	}
 
-	public void setReArabicjo(ReArabicjo reArabicjo) {
-		this.reArabicjo = reArabicjo;
+	public void setGeorgianGe(String georgianGe) {
+		this.georgianGe = georgianGe;
 	}
 
-	public ReFrenchfr getReFrenchfr() {
-		return reFrenchfr;
+	public String getGermanDe() {
+		return germanDe;
 	}
 
-	public void setReFrenchfr(ReFrenchfr reFrenchfr) {
-		this.reFrenchfr = reFrenchfr;
+	public void setGermanDe(String germanDe) {
+		this.germanDe = germanDe;
 	}
 
-	public ReAlbaniankv getReAlbaniankv() {
-		return reAlbaniankv;
+	public String getPersianIr() {
+		return persianIr;
 	}
 
-	public void setReAlbaniankv(ReAlbaniankv reAlbaniankv) {
-		this.reAlbaniankv = reAlbaniankv;
+	public void setPersianIr(String persianIr) {
+		this.persianIr = persianIr;
 	}
 
-	public ReTurkmentm getReTurkmentm() {
-		return reTurkmentm;
+	public String getRomanianRo() {
+		return romanianRo;
 	}
 
-	public void setReTurkmentm(ReTurkmentm reTurkmentm) {
-		this.reTurkmentm = reTurkmentm;
+	public void setRomanianRo(String romanianRo) {
+		this.romanianRo = romanianRo;
 	}
 
-	public ReArabiceg getReArabiceg() {
-		return reArabiceg;
+	public String getRussianRu() {
+		return russianRu;
 	}
 
-	public void setReArabiceg(ReArabiceg reArabiceg) {
-		this.reArabiceg = reArabiceg;
+	public void setRussianRu(String russianRu) {
+		this.russianRu = russianRu;
 	}
 
-	public ReArabicsa getReArabicsa() {
-		return reArabicsa;
+	public String getTurkmenTm() {
+		return turkmenTm;
 	}
 
-	public void setReArabicsa(ReArabicsa reArabicsa) {
-		this.reArabicsa = reArabicsa;
-	}
-
-	public ReStandard getReStandard() {
-		return reStandard;
-	}
-
-	public void setReStandard(ReStandard reStandard) {
-		this.reStandard = reStandard;
+	public void setTurkmenTm(String turkmenTm) {
+		this.turkmenTm = turkmenTm;
 	}
 
 	public ReResourceitem copyResourceItem(ReResource resource) {
@@ -221,22 +208,22 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 		copiedResourceItem.setRightparentid(getRightparentid());
 		copiedResourceItem.setTagnr(getTagnr());
 		copiedResourceItem.setVersion(getVersion());
-		copiedResourceItem.setReTurkishtr(getReTurkishtr());
-		copiedResourceItem.setReEnglishus(getReEnglishus());
-		copiedResourceItem.setReGermande(getReGermande());
-		copiedResourceItem.setRePersianir(getRePersianir());
-		copiedResourceItem.setReAzerbaijaniaz(getReAzerbaijaniaz());
-		copiedResourceItem.setReBulgarianbg(getReBulgarianbg());
-		copiedResourceItem.setReRussianru(getReRussianru());
-		copiedResourceItem.setReRomanianro(getReRomanianro());
-		copiedResourceItem.setReGeorgiange(getReGeorgiange());
-		copiedResourceItem.setReArabicjo(getReArabicjo());
-		copiedResourceItem.setReFrenchfr(getReFrenchfr());
-		copiedResourceItem.setReAlbaniankv(getReAlbaniankv());
-		copiedResourceItem.setReTurkmentm(getReTurkmentm());
-		copiedResourceItem.setReArabiceg(getReArabiceg());
-		copiedResourceItem.setReArabicsa(getReArabicsa());
-		copiedResourceItem.setReStandard(getReStandard());
+		// copiedResourceItem.setReTurkishtr(getReTurkishtr());
+		// copiedResourceItem.setReEnglishus(getReEnglishus());
+		// copiedResourceItem.setReGermande(getReGermande());
+		// copiedResourceItem.setRePersianir(getRePersianir());
+		// copiedResourceItem.setReAzerbaijaniaz(getReAzerbaijaniaz());
+		// copiedResourceItem.setReBulgarianbg(getReBulgarianbg());
+		// copiedResourceItem.setReRussianru(getReRussianru());
+		// copiedResourceItem.setReRomanianro(getReRomanianro());
+		// copiedResourceItem.setReGeorgiange(getReGeorgiange());
+		// copiedResourceItem.setReArabicjo(getReArabicjo());
+		// copiedResourceItem.setReFrenchfr(getReFrenchfr());
+		// copiedResourceItem.setReAlbaniankv(getReAlbaniankv());
+		// copiedResourceItem.setReTurkmentm(getReTurkmentm());
+		// copiedResourceItem.setReArabiceg(getReArabiceg());
+		// copiedResourceItem.setReArabicsa(getReArabicsa());
+		// copiedResourceItem.setReStandard(getReStandard());
 		return copiedResourceItem;
 	}
 

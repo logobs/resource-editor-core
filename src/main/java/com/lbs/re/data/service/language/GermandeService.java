@@ -1,9 +1,9 @@
 package com.lbs.re.data.service.language;
 
-import com.lbs.re.data.service.BaseService;
-import com.lbs.re.model.languages.ReGermande;
 import org.springframework.stereotype.Service;
 
+import com.lbs.re.model.languages.ReGermande;
+
 @Service
-public interface GermandeService extends BaseService<ReGermande, Integer> {
+public interface GermandeService extends LanguageService<ReGermande, Integer> {
 }

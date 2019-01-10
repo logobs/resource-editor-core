@@ -1,9 +1,9 @@
 package com.lbs.re.data.service.language;
 
-import com.lbs.re.data.service.BaseService;
-import com.lbs.re.model.languages.ReArabiceg;
 import org.springframework.stereotype.Service;
 
+import com.lbs.re.model.languages.ReArabiceg;
+
 @Service
-public interface ArabicegService extends BaseService<ReArabiceg, Integer> {
+public interface ArabicegService extends LanguageService<ReArabiceg, Integer> {
 }

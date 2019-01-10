@@ -1,9 +1,9 @@
 package com.lbs.re.data.service.language;
 
-import com.lbs.re.data.service.BaseService;
-import com.lbs.re.model.languages.ReBulgarianbg;
 import org.springframework.stereotype.Service;
 
+import com.lbs.re.model.languages.ReBulgarianbg;
+
 @Service
-public interface BulgarianbgService extends BaseService<ReBulgarianbg, Integer> {
+public interface BulgarianbgService extends LanguageService<ReBulgarianbg, Integer> {
 }

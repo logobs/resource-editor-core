@@ -1,7 +1,6 @@
 package com.lbs.re.data.dao.language;
 
-import com.lbs.re.data.dao.BaseDAO;
 import com.lbs.re.model.languages.ReAlbaniankv;
 
-public interface AlbaniankvDAO extends BaseDAO<ReAlbaniankv, Integer> {
+public interface AlbaniankvDAO extends LanguageDAO<ReAlbaniankv, Integer> {
 }

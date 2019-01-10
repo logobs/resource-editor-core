@@ -1,9 +1,9 @@
 package com.lbs.re.data.service.language;
 
-import com.lbs.re.data.service.BaseService;
-import com.lbs.re.model.languages.ReTurkmentm;
 import org.springframework.stereotype.Service;
 
+import com.lbs.re.model.languages.ReTurkmentm;
+
 @Service
-public interface TurkmentmService extends BaseService<ReTurkmentm, Integer> {
+public interface TurkmentmService extends LanguageService<ReTurkmentm, Integer> {
 }

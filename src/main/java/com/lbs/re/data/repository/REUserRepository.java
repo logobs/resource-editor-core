@@ -17,6 +17,7 @@
 
 package com.lbs.re.data.repository;
 
+import com.lbs.re.data.unscan.BaseRepository;
 import com.lbs.re.model.ReUser;
 
 public interface REUserRepository extends BaseRepository<ReUser, Integer> {

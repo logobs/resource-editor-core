@@ -1,9 +1,9 @@
 package com.lbs.re.data.service.language;
 
-import com.lbs.re.data.service.BaseService;
-import com.lbs.re.model.languages.ReArabicsa;
 import org.springframework.stereotype.Service;
 
+import com.lbs.re.model.languages.ReArabicsa;
+
 @Service
-public interface ArabicsaService extends BaseService<ReArabicsa, Integer> {
+public interface ArabicsaService extends LanguageService<ReArabicsa, Integer> {
 }

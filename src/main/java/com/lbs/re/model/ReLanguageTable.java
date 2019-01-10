@@ -1,14 +1,19 @@
 package com.lbs.re.model;
 
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
-public class ReLanguageTable extends AbstractBaseEntity{
+// @EntityListeners(AuditingEntityListener.class)
+public class ReLanguageTable extends AbstractBaseEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "INFO", columnDefinition = "nvarchar(20)")
 	private String info;
@@ -24,6 +29,13 @@ public class ReLanguageTable extends AbstractBaseEntity{
 
 	@Column(name = "[VERSION]")
 	private Integer version;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RESOURCEREF", insertable = false, updatable = false)
+	private ReResource resource;
+
+	@Column(name = "RESOURCEREF")
+	private Integer resourceref;
 
 	public final String getInfo() {
 		return info;
@@ -63,6 +75,22 @@ public class ReLanguageTable extends AbstractBaseEntity{
 
 	public final void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public ReResource getResource() {
+		return resource;
+	}
+
+	public void setResource(ReResource resource) {
+		this.resource = resource;
+	}
+
+	public Integer getResourceref() {
+		return resourceref;
+	}
+
+	public void setResourceref(Integer resourceref) {
+		this.resourceref = resourceref;
 	}
 
 	public ReLanguageTable() {

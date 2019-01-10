@@ -1,9 +1,9 @@
 package com.lbs.re.data.service.language;
 
-import com.lbs.re.data.service.BaseService;
-import com.lbs.re.model.languages.ReAlbaniankv;
 import org.springframework.stereotype.Service;
 
+import com.lbs.re.model.languages.ReAlbaniankv;
+
 @Service
-public interface AlbaniankvService extends BaseService<ReAlbaniankv, Integer> {
+public interface AlbaniankvService extends LanguageService<ReAlbaniankv, Integer> {
 }

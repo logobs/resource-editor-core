@@ -15,15 +15,14 @@
  * the License.
  */
 
-package com.lbs.re.data.repository;
-
-import com.lbs.re.model.AbstractBaseEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+package com.lbs.re.data.unscan;
 
 import java.io.Serializable;
 
-@Repository("BaseRepository")
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.lbs.re.model.AbstractBaseEntity;
+
 public interface BaseRepository<T extends AbstractBaseEntity, ID extends Serializable> extends JpaRepository<T, ID> {
 
 }

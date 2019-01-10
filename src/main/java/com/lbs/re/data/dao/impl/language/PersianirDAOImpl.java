@@ -1,14 +1,14 @@
 package com.lbs.re.data.dao.impl.language;
 
-import com.lbs.re.data.dao.impl.BaseDAOImpl;
-import com.lbs.re.data.dao.language.PersianirDAO;
-import com.lbs.re.data.repository.language.PersianirRepository;
-import com.lbs.re.model.languages.RePersianir;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lbs.re.data.dao.language.PersianirDAO;
+import com.lbs.re.data.repository.language.PersianirRepository;
+import com.lbs.re.model.languages.RePersianir;
+
 @Component
-public class PersianirDAOImpl extends BaseDAOImpl<RePersianir, Integer> implements PersianirDAO {
+public class PersianirDAOImpl extends LanguageDAOImpl<RePersianir, Integer> implements PersianirDAO {
 
     /**
      * long serialVersionUID

@@ -44,7 +44,7 @@ public class ReResource extends AbstractBaseEntity {
 	@Column(name = "DESCRIPTION", columnDefinition = "nvarchar(128)")
 	private String description;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RESOURCEGROUP")
 	private ReResourceGroup resourcegroup;
 
@@ -79,6 +79,14 @@ public class ReResource extends AbstractBaseEntity {
 
 	@Column(name = "RESOURCECATEGORY")
 	private int resourcecategory;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JoinColumn(name = "RESOURCEREF")
+	private List<ReResourceitem> reResourceitems = new ArrayList<>();
+
+	public ReResource() {
+		/* */
+	}
 
 	public final Integer getResourcenr() {
 		return resourceNr;
@@ -179,14 +187,6 @@ public class ReResource extends AbstractBaseEntity {
 	public boolean isPersisted() {
 		return getId() != null;
 	}
-
-	public ReResource() {
-		/* */
-	}
-
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "resourceref", referencedColumnName = "id")
-	private List<ReResourceitem> reResourceitems = new ArrayList<>();
 
 	public List<ReResourceitem> getReResourceitem() {
 		return reResourceitems;

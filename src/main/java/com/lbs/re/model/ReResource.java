@@ -31,7 +31,8 @@ import com.lbs.re.util.converter.ResourceStateConverter;
 import com.lbs.re.util.converter.ResourceTypeConverter;
 
 @Entity
-@Table(name = "RE_RESOURCES", indexes = { @Index(name = "I_RESOURCES_DESC", columnList = "DESCRIPTION,ID", unique = true),
+@Table(name = "RE_RESOURCES", indexes = {
+		@Index(name = "I_RESOURCES_DESC", columnList = "DESCRIPTION,ID", unique = true),
 		@Index(name = "I_RESOURCES_GRP", columnList = "RESOURCENR,RESOURCEGROUP", unique = true) })
 @EntityListeners(AuditingEntityListener.class)
 public class ReResource extends AbstractBaseEntity {
@@ -194,6 +195,10 @@ public class ReResource extends AbstractBaseEntity {
 
 	public void setReResourceitems(List<ReResourceitem> reResourceitems) {
 		this.reResourceitems = reResourceitems;
+	}
+
+	public String getResourceGroupId() {
+		return getResourcegroup() == null ? "" : getResourcegroup().getID();
 	}
 
 	@PrePersist

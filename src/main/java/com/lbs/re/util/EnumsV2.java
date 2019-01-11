@@ -391,6 +391,12 @@ public class EnumsV2 {
 		}
 	}
 
+	public enum ResourceGroupType {
+
+		LIST, TREE;
+
+	}
+
 	public interface IEnumsV2 extends ResourceEditorLocalizerWrapper {
 
 		String getValue();

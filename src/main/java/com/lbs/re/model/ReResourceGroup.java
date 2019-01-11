@@ -8,6 +8,8 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.lbs.re.util.EnumsV2.ResourceGroupType;
+
 @Entity
 @Table(name = "RE_RESOURCEGROUP")
 @EntityListeners(AuditingEntityListener.class)
@@ -20,16 +22,8 @@ public class ReResourceGroup {
 	@Column(name = "NAME", nullable = false, unique = true)
 	private String name;
 
-	/*
-	 * @OneToMany(mappedBy = "resourcegroup") private List<ReResource> resourceList
-	 * = new ArrayList<ReResource>();
-	 * 
-	 * @OneToMany(mappedBy = "defaultresourcegroup") private List<ReUser> userList =
-	 * new ArrayList<ReUser>();
-	 * 
-	 * @OneToMany(mappedBy = "resgroup") private List<ReMessage> messageList = new
-	 * ArrayList<ReMessage>();
-	 */
+	@Column(name = "RESOURCEGROUPTYPE")
+	private ResourceGroupType resourceGroupType;
 
 	public String getID() {
 		return ID;
@@ -47,26 +41,19 @@ public class ReResourceGroup {
 		this.name = name;
 	}
 
-	/*
-	 * public List<ReResource> getResourceList() { return resourceList; } public
-	 * void setResourceList(List<ReResource> resourceList) { this.resourceList =
-	 * resourceList; } public List<ReUser> getUserList() { return userList; } public
-	 * void setUserList(List<ReUser> userList) { this.userList = userList; } public
-	 * List<ReMessage> getMessageList() { return messageList; } public void
-	 * setMessageList(List<ReMessage> messageList) { this.messageList = messageList;
-	 * }
-	 */
+	public ResourceGroupType getResourceGroupType() {
+		return resourceGroupType;
+	}
+
+	public void setResourceGroupType(ResourceGroupType resourceGroupType) {
+		this.resourceGroupType = resourceGroupType;
+	}
 
 	@Override
 	public String toString() {
 		return name;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,11 +62,6 @@ public class ReResourceGroup {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)

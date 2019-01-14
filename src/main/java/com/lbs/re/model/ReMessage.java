@@ -18,7 +18,7 @@ import com.lbs.re.util.converter.MessageTypeConverter;
 import com.lbs.re.util.converter.ResourceStateConverter;
 
 @Entity
-@Table(name = "RE_MESSAGES", indexes = { @Index(name = "I_MESSAGES_CONSID", columnList = "CONS_ID,ID", unique = true) })
+@Table(name = "RE_MESSAGES", indexes = { @Index(name = "I_MESSAGES_CONSID", columnList = "CONS_ID", unique = true) })
 @EntityListeners(AuditingEntityListener.class)
 public class ReMessage extends AbstractBaseEntity {
 
@@ -38,10 +38,10 @@ public class ReMessage extends AbstractBaseEntity {
 	private int defButton = 0;
 
 	@Column(name = "DETAIL_LISTID")
-	private int detailListid = 0;
+	private Integer detailListid = null;
 
 	@Column(name = "DETAIL_RESGROUP", columnDefinition = "nvarchar(20)")
-	private String detailResgroup = "";
+	private String detailResgroup = null;
 
 	@Column(name = "DETAIL_TAGNR")
 	private int detailTagnr = 0;
@@ -95,11 +95,11 @@ public class ReMessage extends AbstractBaseEntity {
 		this.defButton = defButton;
 	}
 
-	public final int getDetailListid() {
+	public final Integer getDetailListid() {
 		return this.detailListid;
 	}
 
-	public final void setDetailListid(int detailListid) {
+	public final void setDetailListid(Integer detailListid) {
 		this.detailListid = detailListid;
 	}
 

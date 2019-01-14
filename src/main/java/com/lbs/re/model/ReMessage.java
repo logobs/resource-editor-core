@@ -41,7 +41,7 @@ public class ReMessage extends AbstractBaseEntity {
 	private int detailListid = 0;
 
 	@Column(name = "DETAIL_RESGROUP", columnDefinition = "nvarchar(20)")
-	private String detailResgroup = "";
+	private String detailResgroup = null;
 
 	@Column(name = "DETAIL_TAGNR")
 	private int detailTagnr = 0;

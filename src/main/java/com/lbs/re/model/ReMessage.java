@@ -18,7 +18,7 @@ import com.lbs.re.util.converter.MessageTypeConverter;
 import com.lbs.re.util.converter.ResourceStateConverter;
 
 @Entity
-@Table(name = "RE_MESSAGES", indexes = { @Index(name = "I_MESSAGES_CONSID", columnList = "CONS_ID,ID", unique = true) })
+@Table(name = "RE_MESSAGES", indexes = { @Index(name = "I_MESSAGES_CONSID", columnList = "CONS_ID", unique = true) })
 @EntityListeners(AuditingEntityListener.class)
 public class ReMessage extends AbstractBaseEntity {
 

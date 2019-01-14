@@ -3,7 +3,6 @@ package com.lbs.re.model;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
@@ -11,11 +10,6 @@ import javax.persistence.PreUpdate;
 
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.lbs.re.util.EnumsV2.OwnerProduct;
-import com.lbs.re.util.EnumsV2.ResourceCase;
-import com.lbs.re.util.converter.OwnerProductConverter;
-import com.lbs.re.util.converter.ResourceCaseConverter;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -44,9 +38,9 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	@Column(name = "ORDERNR")
 	private Integer ordernr;
 
-	@Convert(converter = OwnerProductConverter.class)
+	// @Convert(converter = OwnerProductConverter.class)
 	@Column(name = "OWNERPRODUCT")
-	private OwnerProduct ownerproduct;
+	private Integer ownerproduct = 0;
 
 	@Column(name = "PREFIXSTR", columnDefinition = "nvarchar(30)")
 	private String prefixstr;
@@ -54,18 +48,18 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	@Column(name = "REQUESTED")
 	private Integer requested;
 
-	@Convert(converter = ResourceCaseConverter.class)
+	// @Convert(converter = ResourceCaseConverter.class)
 	@Column(name = "RESOURCECASE")
-	private ResourceCase resourcecase;
+	private Integer resourcecase = 0;
 
 	@Column(name = "RESOURCECATEGORY")
-	private Integer resourcecategory;
+	private Integer resourcecategory = 0;
 
 	@Column(name = "RESOURCEREF")
 	private Integer resourceref;
 
 	@Column(name = "RESOURCETYPE")
-	private Integer resourcetype;
+	private Integer resourcetype = 0;
 
 	@Column(name = "RIGHTLEVELNR")
 	private Integer rightlevelnr;
@@ -127,11 +121,11 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 		this.ordernr = ordernr;
 	}
 
-	public final OwnerProduct getOwnerproduct() {
+	public final Integer getOwnerproduct() {
 		return ownerproduct;
 	}
 
-	public final void setOwnerproduct(OwnerProduct ownerproduct) {
+	public final void setOwnerproduct(Integer ownerproduct) {
 		this.ownerproduct = ownerproduct;
 	}
 
@@ -151,11 +145,11 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 		this.requested = requested;
 	}
 
-	public final ResourceCase getResourcecase() {
+	public final Integer getResourcecase() {
 		return resourcecase;
 	}
 
-	public final void setResourcecase(ResourceCase resourcecase) {
+	public final void setResourcecase(Integer resourcecase) {
 		this.resourcecase = resourcecase;
 	}
 

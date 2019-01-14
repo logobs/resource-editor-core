@@ -11,8 +11,7 @@ import javax.persistence.Transient;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "RE_RESOURCEITEMS", indexes = {
-		@Index(name = "I_RESOURCEITEMS_INFO", columnList = "INFO,ID", unique = true),
+@Table(name = "RE_RESOURCEITEMS", indexes = { @Index(name = "I_RESOURCEITEMS_INFO", columnList = "INFO,ID", unique = true),
 		@Index(name = "I_RESOURCEITEMS_ORDERNR_TAGNR", columnList = "RESOURCEREF,ORDERNR,TAGNR", unique = true),
 		@Index(name = "I_RESOURCEITEMS_TAGNR", columnList = "RESOURCEREF,TAGNR", unique = true) })
 @EntityListeners(AuditingEntityListener.class)
@@ -41,7 +40,7 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 	private String azerbaijaniAz;
 
 	@Transient
-	private String bulguarianBg;
+	private String bulgarianBg;
 
 	@Transient
 	private String englishUs;
@@ -119,12 +118,12 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 		this.azerbaijaniAz = azerbaijaniAz;
 	}
 
-	public String getBulguarianBg() {
-		return bulguarianBg;
+	public String getBulgarianBg() {
+		return bulgarianBg;
 	}
 
-	public void setBulguarianBg(String bulguarianBg) {
-		this.bulguarianBg = bulguarianBg;
+	public void setBulgarianBg(String bulgarianBg) {
+		this.bulgarianBg = bulgarianBg;
 	}
 
 	public String getEnglishUs() {
@@ -201,7 +200,7 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 		copiedResourceItem.setOwnerproduct(getOwnerproduct());
 		copiedResourceItem.setPrefixstr(getPrefixstr());
 		copiedResourceItem.setRequested(getRequested());
-		copiedResourceItem.setResourcecase(resource.getResourcecase());
+		// copiedResourceItem.setResourcecase(resource.getResourcecase());
 		copiedResourceItem.setResourcecategory(resource.getResourcecategory());
 		copiedResourceItem.setResourcetype(resource.getResourcetype().getTyp());
 		copiedResourceItem.setRightlevelnr(getRightlevelnr());
@@ -229,13 +228,10 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
+		return super.clone();
+	}
 	/**
-	 * @PostRemove protected void afterDelete() { ReTurkishtrRep reTurkishtrRep =
-	 *             LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep();
-	 *             List<ReTurkishtr> reTurkishtrs =
-	 *             reTurkishtrRep.findByresourceitemrefEqualsForDelete(getId());
-	 *             reTurkishtrs.forEach(item -> reTurkishtrRep.delete(item)); }
+	 * @PostRemove protected void afterDelete() { ReTurkishtrRep reTurkishtrRep = LogoresMainUI.getMrepositorycontainer().getReTurkishtrRep(); List<ReTurkishtr> reTurkishtrs =
+	 *             reTurkishtrRep.findByresourceitemrefEqualsForDelete(getId()); reTurkishtrs.forEach(item -> reTurkishtrRep.delete(item)); }
 	 **/
 }

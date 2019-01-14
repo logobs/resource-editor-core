@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 
 @MappedSuperclass
 // @EntityListeners(AuditingEntityListener.class)
@@ -33,6 +34,10 @@ public class ReLanguageTable extends AbstractBaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RESOURCEREF", insertable = false, updatable = false)
 	private ReResource resource;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RESOURCEITEMREF", referencedColumnName = "ID", insertable = false, updatable = false)
+	public ReResourceitem reResourceitem;
 
 	@Column(name = "RESOURCEREF")
 	private Integer resourceref;
@@ -91,6 +96,14 @@ public class ReLanguageTable extends AbstractBaseEntity {
 
 	public void setResourceref(Integer resourceref) {
 		this.resourceref = resourceref;
+	}
+
+	public ReResourceitem getReResourceitem() {
+		return reResourceitem;
+	}
+
+	public void setReResourceitem(ReResourceitem reResourceitem) {
+		this.reResourceitem = reResourceitem;
 	}
 
 	public ReLanguageTable() {

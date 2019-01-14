@@ -38,7 +38,7 @@ public class ReMessage extends AbstractBaseEntity {
 	private int defButton = 0;
 
 	@Column(name = "DETAIL_LISTID")
-	private int detailListid = 0;
+	private Integer detailListid = null;
 
 	@Column(name = "DETAIL_RESGROUP", columnDefinition = "nvarchar(20)")
 	private String detailResgroup = null;
@@ -95,11 +95,11 @@ public class ReMessage extends AbstractBaseEntity {
 		this.defButton = defButton;
 	}
 
-	public final int getDetailListid() {
+	public final Integer getDetailListid() {
 		return this.detailListid;
 	}
 
-	public final void setDetailListid(int detailListid) {
+	public final void setDetailListid(Integer detailListid) {
 		this.detailListid = detailListid;
 	}
 

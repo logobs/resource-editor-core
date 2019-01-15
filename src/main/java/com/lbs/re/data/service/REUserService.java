@@ -17,12 +17,19 @@
 
 package com.lbs.re.data.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.lbs.re.exception.localized.LocalizedException;
+import com.lbs.re.model.ReOperation;
 import com.lbs.re.model.ReUser;
 
 
 @Service
 public interface REUserService extends BaseService<ReUser, Integer> {
-	ReUser getUserListByUsername(String userName);
+
+	public ReUser getUserListByUsername(String userName);
+
+	public List<ReOperation> getUserOperationList(Integer userId) throws LocalizedException;
 }

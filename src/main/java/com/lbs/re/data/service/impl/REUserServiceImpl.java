@@ -17,11 +17,15 @@
 
 package com.lbs.re.data.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lbs.re.data.dao.REUserDAO;
 import com.lbs.re.data.service.REUserService;
+import com.lbs.re.exception.localized.LocalizedException;
+import com.lbs.re.model.ReOperation;
 import com.lbs.re.model.ReUser;
 
 @Service
@@ -44,4 +48,11 @@ public class REUserServiceImpl extends BaseServiceImpl<ReUser, Integer> implemen
 	public ReUser getUserListByUsername(String userName) {
         return dao.getUserListByUsername(userName);
     }
+
+	@Override
+	public List<ReOperation> getUserOperationList(Integer userId) throws LocalizedException {
+		ReUser user = getById(userId);
+		List<ReOperation> operations = user.getUserGroup().getOperations();
+		return operations;
+	}
 }

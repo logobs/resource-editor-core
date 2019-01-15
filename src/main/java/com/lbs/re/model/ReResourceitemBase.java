@@ -20,7 +20,7 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	public static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
 
 	@Column(name = "ACTIVE")
-	private Integer active;
+	private Integer active = 1;
 
 	@LastModifiedDate
 	@Column(name = "AUTOMODIFIEDON", columnDefinition = "datetime")
@@ -81,6 +81,13 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 		this.active = active;
 	}
 
+	public String getActiveValue() {
+		if (active == 1) {
+			return "Active";
+		} else {
+			return "Deactive";
+		}
+	}
 	public final LocalDateTime getAutomodifiedon() {
 		return automodifiedon;
 	}

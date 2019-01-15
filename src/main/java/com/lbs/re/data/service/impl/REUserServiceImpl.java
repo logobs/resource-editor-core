@@ -31,28 +31,38 @@ import com.lbs.re.model.ReUser;
 @Service
 public class REUserServiceImpl extends BaseServiceImpl<ReUser, Integer> implements REUserService {
 
-    /**
-     * long serialVersionUID
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 * long serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private REUserDAO dao;
+	private REUserDAO dao;
 
-    @Autowired
-    public void setDao(REUserDAO dao) {
-        this.dao = dao;
-        super.setBaseDao(dao);
-    }
-
-    @Override
-	public ReUser getUserListByUsername(String userName) {
-        return dao.getUserListByUsername(userName);
-    }
+	@Autowired
+	public void setDao(REUserDAO dao) {
+		this.dao = dao;
+		super.setBaseDao(dao);
+	}
 
 	@Override
-	public List<ReOperation> getUserOperationList(Integer userId) throws LocalizedException {
+	public ReUser getUserListByUsername(String userName) {
+		return dao.getUserListByUsername(userName);
+	}
+
+	private List<ReOperation> getUserOperationList(Integer userId) throws LocalizedException {
 		ReUser user = getById(userId);
 		List<ReOperation> operations = user.getUserGroup().getOperations();
 		return operations;
+	}
+
+	@Override
+	public boolean isUserAuth(Integer userId, String operationName) throws LocalizedException {
+		List<ReOperation> operationList = getUserOperationList(userId);
+		for (ReOperation operation : operationList) {
+			if (operation.getOperationName().equals(operationName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

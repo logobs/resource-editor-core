@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -52,6 +53,10 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 
 	@Column(name = "DEDEACCESSRIGHTS")
 	private Integer dedeaccessrights = 0;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USERGROUPREF")
+	private ReUserGroup userGroup;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "DEFAULTLANGUAGE", columnDefinition = "nvarchar(8)")
@@ -483,6 +488,14 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 
 	public void setZhcnaccessrights(Integer zhcnaccessrights) {
 		this.zhcnaccessrights = zhcnaccessrights;
+	}
+
+	public ReUserGroup getUserGroup() {
+		return userGroup;
+	}
+
+	public void setUserGroup(ReUserGroup userGroup) {
+		this.userGroup = userGroup;
 	}
 
 	public boolean isPersisted() {

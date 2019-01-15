@@ -20,6 +20,8 @@ import com.lbs.re.util.HasLogger;
 @MappedSuperclass
 public class AbstractBaseEntity implements Serializable, HasLogger {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "ID", nullable = false, updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

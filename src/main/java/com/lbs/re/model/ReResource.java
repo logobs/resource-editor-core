@@ -2,6 +2,9 @@ package com.lbs.re.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,8 +34,7 @@ import com.lbs.re.util.converter.ResourceStateConverter;
 import com.lbs.re.util.converter.ResourceTypeConverter;
 
 @Entity
-@Table(name = "RE_RESOURCES", indexes = {
-		@Index(name = "I_RESOURCES_DESC", columnList = "DESCRIPTION,ID", unique = true),
+@Table(name = "RE_RESOURCES", indexes = { @Index(name = "I_RESOURCES_DESC", columnList = "DESCRIPTION,ID", unique = true),
 		@Index(name = "I_RESOURCES_GRP", columnList = "RESOURCENR,RESOURCEGROUP", unique = true) })
 @EntityListeners(AuditingEntityListener.class)
 public class ReResource extends AbstractBaseEntity {
@@ -206,6 +208,26 @@ public class ReResource extends AbstractBaseEntity {
 	protected void beforeInsertOrUpdate() {
 		automodifiedon = LocalDateTime.now();
 		setModifiedon(LocalDateTime.now());
+	}
+
+	public void orderResourceItems() {
+		Collections.sort(reResourceitems, new Comparator<ReResourceitem>() {
+			@Override
+			public int compare(ReResourceitem o1, ReResourceitem o2) {
+				int c;
+				c = o1.getOrdernr().compareTo(o2.getOrdernr());
+				if (c == 0) {
+					c = o1.getLevelnr().compareTo(o2.getLevelnr());
+				}
+				if (c == 0) {
+					c = o1.getTagnr().compareTo(o2.getTagnr());
+				}
+				return c;
+			}
+		});
+		for (int i = 0; i < reResourceitems.size(); i++) {
+			reResourceitems.get(i).setOrdernr(i);
+		}
 	}
 
 	public ReResource copyResource() {

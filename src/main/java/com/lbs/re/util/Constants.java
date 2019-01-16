@@ -132,6 +132,7 @@ public final class Constants {
 
 	public static final String JPLATFORM = "jplatform";
 	public static final String TIGER = "tiger";
+	public static final String DICTIONARY = "dictionary";
 
 	private Constants() {
 	}

@@ -73,6 +73,9 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	@Column(name = "VERSION")
 	private Integer version;
 
+	@Column(name = "DICTIONARYID")
+	private Integer dictionaryId;
+
 	public final Integer getActive() {
 		return active;
 	}
@@ -214,6 +217,14 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 
 	public final void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public Integer getDictionaryId() {
+		return dictionaryId;
+	}
+
+	public void setDictionaryId(Integer dictionaryId) {
+		this.dictionaryId = dictionaryId;
 	}
 
 	public ReResourceitemBase() {

@@ -134,6 +134,11 @@ public final class Constants {
 	public static final String TIGER = "tiger";
 	public static final String DICTIONARY = "dictionary";
 
+	/**
+	 * DICTIONARY_DATABASE
+	 */
+	public static final String DICTIONARY_DATABASE = "DICTIONARY";
+
 	private Constants() {
 	}
 

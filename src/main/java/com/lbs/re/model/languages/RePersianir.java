@@ -8,7 +8,7 @@ import com.lbs.re.model.ReLanguageTable;
 import com.lbs.re.model.ReResourceitem;
 
 @Entity
-@Table(name = "RE_PERSIANIR", indexes = { @Index(name = "I_PERSIANIR_INFO", columnList = "INFO,ID", unique = true),
+@Table(name = "RE_PERSIANIR_ORG", indexes = { @Index(name = "I_PERSIANIR_INFO", columnList = "INFO,ID", unique = true),
 		@Index(name = "I_PERSIANIR_RESITEMREF", columnList = "RESOURCEITEMREF", unique = false) })
 public class RePersianir extends ReLanguageTable {
 

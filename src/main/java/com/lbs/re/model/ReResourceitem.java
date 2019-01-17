@@ -66,8 +66,19 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 	@Transient
 	private String turkmenTm;
 
+	@Transient
+	private String standard;
+
 	public ReResourceitem() {
 		/* */
+	}
+
+	public String getStandard() {
+		return standard;
+	}
+
+	public void setStandard(String standard) {
+		this.standard = standard;
 	}
 
 	public String getTurkishTr() {

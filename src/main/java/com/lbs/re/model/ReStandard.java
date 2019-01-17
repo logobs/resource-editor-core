@@ -8,6 +8,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,6 +39,13 @@ public class ReStandard extends AbstractBaseEntity implements Serializable {
 
 	@Column(name = "VERSION")
 	private Integer version;
+
+	@Column(name = "RESOURCEREF")
+	private Integer resourceref;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RESOURCEREF", insertable = false, updatable = false)
+	private ReResource resource;
 
 	public String getResourceStr() {
 		return resourceStr;
@@ -77,6 +85,22 @@ public class ReStandard extends AbstractBaseEntity implements Serializable {
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public Integer getResourceref() {
+		return resourceref;
+	}
+
+	public void setResourceref(Integer resourceref) {
+		this.resourceref = resourceref;
+	}
+
+	public ReResource getResource() {
+		return resource;
+	}
+
+	public void setResource(ReResource resource) {
+		this.resource = resource;
 	}
 
 	public ReStandard cloneStandard(Integer itemId) {

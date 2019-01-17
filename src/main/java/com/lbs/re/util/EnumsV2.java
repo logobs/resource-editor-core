@@ -397,6 +397,13 @@ public class EnumsV2 {
 
 	}
 
+	public enum Languages {
+
+		ALBANIAN, ARABICEG, ARABISJO, ARABICSA, AZARBAIJAN, BULGARIAN, ENGLISH, FRENCH, GEORGIAN, GERMAN, PERSIAN,
+		ROMANIAN, RUSSIAN, TURKISH, TURKMEN;
+
+	}
+
 	public interface IEnumsV2 extends ResourceEditorLocalizerWrapper {
 
 		String getValue();

@@ -9,21 +9,27 @@ import com.lbs.re.model.ReResource;
 
 @Service
 public class ResourceServiceImpl extends BaseServiceImpl<ReResource, Integer> implements ResourceService {
-    /**
-     * long serialVersionUID
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 * long serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private ResourceDAO dao;
+	private ResourceDAO dao;
 
-    @Autowired
-    public void setDao(ResourceDAO dao) {
-        this.dao = dao;
-        super.setBaseDao(dao);
-    }
+	@Autowired
+	public void setDao(ResourceDAO dao) {
+		this.dao = dao;
+		super.setBaseDao(dao);
+	}
 
-    @Override
+	@Override
 	public ReResource getResourceByNumber(int resourceNr) {
 		return dao.getResourceByNumber(resourceNr);
-    }
+	}
+
+	@Override
+	public int getMaxResourceNumber() {
+		// TODO Auto-generated method stub
+		return dao.getMaxResourceNumber();
+	}
 }

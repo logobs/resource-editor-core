@@ -9,21 +9,26 @@ import com.lbs.re.model.ReResource;
 
 @Component
 public class ResourceDAOImpl extends BaseDAOImpl<ReResource, Integer> implements ResourceDAO {
-    /**
-     * long serialVersionUID
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 * long serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private transient ResourceRepository repository;
+	private transient ResourceRepository repository;
 
-    @Autowired
-    public void setRepository(ResourceRepository repository) {
-        this.repository = repository;
-        super.setRepository(repository);
-    }
+	@Autowired
+	public void setRepository(ResourceRepository repository) {
+		this.repository = repository;
+		super.setRepository(repository);
+	}
 
-    @Override
+	@Override
 	public ReResource getResourceByNumber(int resourceNr) {
 		return repository.findByresourceNr(resourceNr);
-    }
+	}
+
+	@Override
+	public int getMaxResourceNumber() {
+		return repository.getMaxResourceNumber();
+	}
 }

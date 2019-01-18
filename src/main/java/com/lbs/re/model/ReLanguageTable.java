@@ -116,6 +116,7 @@ public class ReLanguageTable extends AbstractBaseEntity {
 		language.setTrkey(trkey);
 		language.setVersion(version);
 		language.setResourceitemref(item.getId());
+		language.setResourceref(item.getResourceref());
 		return language;
 	}
 

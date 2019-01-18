@@ -211,29 +211,12 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 		copiedResourceItem.setOwnerproduct(getOwnerproduct());
 		copiedResourceItem.setPrefixstr(getPrefixstr());
 		copiedResourceItem.setRequested(getRequested());
-		// copiedResourceItem.setResourcecase(resource.getResourcecase());
 		copiedResourceItem.setResourcecategory(resource.getResourcecategory());
 		copiedResourceItem.setResourcetype(resource.getResourcetype().getTyp());
 		copiedResourceItem.setRightlevelnr(getRightlevelnr());
 		copiedResourceItem.setRightparentid(getRightparentid());
 		copiedResourceItem.setTagnr(getTagnr());
 		copiedResourceItem.setVersion(getVersion());
-		// copiedResourceItem.setReTurkishtr(getReTurkishtr());
-		// copiedResourceItem.setReEnglishus(getReEnglishus());
-		// copiedResourceItem.setReGermande(getReGermande());
-		// copiedResourceItem.setRePersianir(getRePersianir());
-		// copiedResourceItem.setReAzerbaijaniaz(getReAzerbaijaniaz());
-		// copiedResourceItem.setReBulgarianbg(getReBulgarianbg());
-		// copiedResourceItem.setReRussianru(getReRussianru());
-		// copiedResourceItem.setReRomanianro(getReRomanianro());
-		// copiedResourceItem.setReGeorgiange(getReGeorgiange());
-		// copiedResourceItem.setReArabicjo(getReArabicjo());
-		// copiedResourceItem.setReFrenchfr(getReFrenchfr());
-		// copiedResourceItem.setReAlbaniankv(getReAlbaniankv());
-		// copiedResourceItem.setReTurkmentm(getReTurkmentm());
-		// copiedResourceItem.setReArabiceg(getReArabiceg());
-		// copiedResourceItem.setReArabicsa(getReArabicsa());
-		// copiedResourceItem.setReStandard(getReStandard());
 		return copiedResourceItem;
 	}
 

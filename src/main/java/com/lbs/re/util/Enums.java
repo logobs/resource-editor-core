@@ -91,15 +91,7 @@ public class Enums {
 	 */
 	public enum ResourceEditorLogLevel implements IEnums {
 
-		ALL("ALL", 0),
-		TRACE("TRACE", 1),
-		TRACE_INT("TRACE_INT", 2),
-		DEBUG("DEBUG", 3),
-		INFO("INFO", 4),
-		WARN("WARN", 5),
-		ERROR("ERROR", 6),
-		FATAL("FATAL", 7),
-		OFF("OFF", 8);
+		ALL("ALL", 0), TRACE("TRACE", 1), TRACE_INT("TRACE_INT", 2), DEBUG("DEBUG", 3), INFO("INFO", 4), WARN("WARN", 5), ERROR("ERROR", 6), FATAL("FATAL", 7), OFF("OFF", 8);
 
 		private String levelName;
 		private Integer levelCode;

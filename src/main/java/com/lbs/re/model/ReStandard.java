@@ -103,12 +103,13 @@ public class ReStandard extends AbstractBaseEntity implements Serializable {
 		this.resource = resource;
 	}
 
-	public ReStandard cloneStandard(Integer itemId) {
+	public ReStandard cloneStandard(ReResourceitem item) {
 		ReStandard reStandard = new ReStandard();
 		reStandard.setResourceStr(resourceStr);
 		reStandard.setInfo(info);
 		reStandard.setVersion(version);
-		reStandard.setResourceitemref(itemId);
+		reStandard.setResourceitemref(item.getId());
+		reStandard.setResourceref(item.getResourceref());
 		return reStandard;
 	}
 

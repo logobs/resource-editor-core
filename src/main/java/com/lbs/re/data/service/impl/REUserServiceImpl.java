@@ -71,4 +71,12 @@ public class REUserServiceImpl extends BaseServiceImpl<ReUser, Integer> implemen
 		}
 		return false;
 	}
+
+	@Override
+	public void beforeSave(ReUser entity) throws LocalizedException {
+		ReUserGroup group = new ReUserGroup();
+		group.setId(entity.getGeneralaccessrights().getTyp());
+		entity.setUserGroup(group);
+	}
+
 }

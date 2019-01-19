@@ -17,6 +17,7 @@
 
 package com.lbs.re.data.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import com.lbs.re.data.service.REUserService;
 import com.lbs.re.exception.localized.LocalizedException;
 import com.lbs.re.model.ReOperation;
 import com.lbs.re.model.ReUser;
+import com.lbs.re.model.ReUserGroup;
 
 @Service
 public class REUserServiceImpl extends BaseServiceImpl<ReUser, Integer> implements REUserService {
@@ -51,7 +53,11 @@ public class REUserServiceImpl extends BaseServiceImpl<ReUser, Integer> implemen
 
 	private List<ReOperation> getUserOperationList(Integer userId) throws LocalizedException {
 		ReUser user = getById(userId);
-		List<ReOperation> operations = user.getUserGroup().getOperations();
+		ReUserGroup userGroup = user.getUserGroup();
+		if (userGroup == null) {
+			return new ArrayList<ReOperation>();
+		}
+		List<ReOperation> operations = userGroup.getOperations();
 		return operations;
 	}
 

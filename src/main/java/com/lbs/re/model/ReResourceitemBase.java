@@ -30,13 +30,13 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	private String info;
 
 	@Column(name = "LEVELNR")
-	private Integer levelnr;
+	private Integer levelnr = Integer.valueOf(0);
 
 	@Column(name = "LOCALIZATIONAFFECTED")
 	private Integer localizationaffected;
 
 	@Column(name = "ORDERNR")
-	private Integer ordernr;
+	private Integer ordernr = Integer.valueOf(0);
 
 	// @Convert(converter = OwnerProductConverter.class)
 	@Column(name = "OWNERPRODUCT")
@@ -68,7 +68,7 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 	private Integer rightparentid;
 
 	@Column(name = "TAGNR")
-	private Integer tagnr;
+	private Integer tagnr = Integer.valueOf(0);
 
 	@Column(name = "VERSION")
 	private Integer version;
@@ -91,6 +91,7 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 			return "Deactive";
 		}
 	}
+
 	public final LocalDateTime getAutomodifiedon() {
 		return automodifiedon;
 	}

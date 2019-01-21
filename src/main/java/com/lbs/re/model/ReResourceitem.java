@@ -217,6 +217,7 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 		copiedResourceItem.setRightparentid(getRightparentid());
 		copiedResourceItem.setTagnr(getTagnr());
 		copiedResourceItem.setVersion(getVersion());
+		copiedResourceItem.setDictionaryId(getDictionaryId());
 		return copiedResourceItem;
 	}
 

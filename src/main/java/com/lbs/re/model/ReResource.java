@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -210,7 +209,8 @@ public class ReResource extends AbstractBaseEntity {
 		setModifiedon(LocalDateTime.now());
 	}
 
-	public void orderResourceItems() {
+	public List<ReResourceitem> orderResourceItems() {
+		List<ReResourceitem> reOrderedList = new ArrayList<ReResourceitem>();
 		Collections.sort(reResourceitems, new Comparator<ReResourceitem>() {
 			@Override
 			public int compare(ReResourceitem o1, ReResourceitem o2) {
@@ -226,8 +226,12 @@ public class ReResource extends AbstractBaseEntity {
 			}
 		});
 		for (int i = 0; i < reResourceitems.size(); i++) {
-			reResourceitems.get(i).setOrdernr(i);
+			if (!reResourceitems.get(i).getOrdernr().equals(i)) {
+				reResourceitems.get(i).setOrdernr(i);
+				reOrderedList.add(reResourceitems.get(i));
+			}
 		}
+		return reOrderedList;
 	}
 
 	public ReResource copyResource() {

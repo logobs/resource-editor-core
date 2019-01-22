@@ -9,4 +9,6 @@ import com.lbs.re.model.ReResourceitem;
 @Service
 public interface ResourceitemService extends BaseService<ReResourceitem, Integer>{
 	List<ReResourceitem> getItemListByResource(int resourceref);
+
+	void updateOrderNumbers(List<ReResourceitem> itemList);
 }

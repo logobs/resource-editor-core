@@ -28,4 +28,9 @@ public class ResourceitemServiceImpl extends BaseServiceImpl<ReResourceitem, Int
 	public List<ReResourceitem> getItemListByResource(int resourceref) {
 		return dao.getItemListByResource(resourceref);
 	}
+
+	@Override
+	public void updateOrderNumbers(List<ReResourceitem> itemList) {
+		dao.updateOrderNumbers(itemList);
+	}
 }

@@ -16,7 +16,7 @@ public class ReLanguageTable extends AbstractBaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "INFO", columnDefinition = "nvarchar(20)")
+	@Column(name = "INFO", columnDefinition = "nvarchar(40)")
 	private String info;
 
 	@Column(name = "RESOURCEITEMREF")

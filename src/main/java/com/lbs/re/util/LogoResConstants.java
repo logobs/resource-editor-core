@@ -50,6 +50,18 @@ public class LogoResConstants {
     public static final String RE_ARABICAE_NAME = "Arabic (AE)";
     public static final String RE_STANDARD_NAME = "Resource String";
 
+	public static final String IS_EMPTY = "Is Empty";
+	public static final String IS_NOT_EMPTY = "Is not empty";
+	public static final String IS_NOT_EMPTY_OR_DASH = "Is not empty or dash";
+	public static final String CONTAINS = "Contains...";
+	public static final String NOTCONTAINS = "Does not contain";
+	public static final String BEGINS_WITH = "Begins with";
+	public static final String NOT_BEGINS_WITH = "Does not begins with";
+	public static final String ENDS_WITH = "Ends with";
+	public static final String NOT_ENDS_WITH = "Does not ends with";
+	public static final String IS_EQUAL = "Is equal to";
+	public static final String NOT_EQUAL = "Is not equal to";
+
     public static final String CANCELSTR = "button.cancel";
     public static final String SAVESTR = "button.save";
     public static final String SAVEANDNEWSTR = "button.saveandnew";

@@ -40,4 +40,9 @@ public class LanguageServiceImpl<T extends ReLanguageTable, ID extends Serializa
 		dao.deleteLanguageByResourceItemref(resourceitemref);
 	}
 
+	@Override
+	public List<T> getAllByResourceitemrefIn(List<Integer> resourceItemRefIdList) {
+		return dao.getAllByResourceitemrefIn(resourceItemRefIdList);
+	}
+
 }

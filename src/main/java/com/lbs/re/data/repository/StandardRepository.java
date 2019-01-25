@@ -13,6 +13,8 @@ public interface StandardRepository extends BaseRepository<ReStandard, Integer> 
 
 	List<ReStandard> findByresourceref(Integer resourceref);
 
+	List<ReStandard> findAllByResourceitemrefIn(List<Integer> resourceItemRefIdList);
+
 	@Transactional
 	void deleteByresourceitemref(Integer resourceitemref);
 }

@@ -361,9 +361,9 @@ public class EnumsV2 {
 	}
 
 	public enum SearchFilter {
+		// TODO multilang olmalı
 		ISEMPTY(LogoResConstants.IS_EMPTY),
 		ISNOTEMPTY(LogoResConstants.IS_NOT_EMPTY),
-		ISNOTEMPTYORDASH(LogoResConstants.IS_NOT_EMPTY_OR_DASH),
 		CONTAINS(LogoResConstants.CONTAINS),
 		NOTCONTAIN(LogoResConstants.NOTCONTAINS),
 		BEGINSWITH(LogoResConstants.BEGINS_WITH),

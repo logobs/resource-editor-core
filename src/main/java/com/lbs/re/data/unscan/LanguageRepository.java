@@ -14,4 +14,8 @@ public interface LanguageRepository<T extends ReLanguageTable, ID extends Serial
 
 	@Transactional
 	void deleteByresourceitemref(Integer resourceitemref);
+
+	List<T> findAllByResourceitemrefLessThanEqualAndResourceitemrefGreaterThanEqual(Integer maxId, Integer minId);
+
+	List<T> findAllByResourceitemrefIn(List<Integer> resourceItemRefIdList);
 }

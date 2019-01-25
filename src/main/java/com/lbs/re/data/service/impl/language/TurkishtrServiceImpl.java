@@ -1,5 +1,7 @@
 package com.lbs.re.data.service.impl.language;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +22,10 @@ public class TurkishtrServiceImpl extends LanguageServiceImpl<ReTurkishtr, Integ
 	public void setDao(TurkishtrDAO dao) {
 		this.dao = dao;
 		super.setBaseDao(dao);
+	}
+
+	@Override
+	public List<ReTurkishtr> getTurkishListBetweenItemIds(Integer maxId, Integer minId) {
+		return dao.getTurkishListBetweenItemIds(maxId, minId);
 	}
 }

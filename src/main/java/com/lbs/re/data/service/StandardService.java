@@ -13,4 +13,6 @@ public interface StandardService extends BaseService<ReStandard, Integer> {
 	void deleteStandardByResourceItemref(Integer resourceitemref);
 
 	List<ReStandard> getStandardListByResourceref(Integer resourceref);
+
+	List<ReStandard> getAllByResourceitemrefIn(List<Integer> resourceItemRefIdList);
 }

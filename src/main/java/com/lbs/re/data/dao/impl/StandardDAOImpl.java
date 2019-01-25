@@ -39,4 +39,9 @@ public class StandardDAOImpl extends BaseDAOImpl<ReStandard, Integer> implements
 		return repository.findByresourceref(resourceref);
 	}
 
+	@Override
+	public List<ReStandard> getAllByResourceitemrefIn(List<Integer> resourceItemRefIdList) {
+		return repository.findAllByResourceitemrefIn(resourceItemRefIdList);
+	}
+
 }

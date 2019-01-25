@@ -1,5 +1,7 @@
 package com.lbs.re.data.service.impl.language;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,4 +23,9 @@ public class EnglishusServiceImpl extends LanguageServiceImpl<ReEnglishus, Integ
         this.dao = dao;
         super.setBaseDao(dao);
     }
+
+	@Override
+	public List<ReEnglishus> getEnglishListBetweenItemIds(Integer maxId, Integer minId) {
+		return dao.getEnglishListBetweenItemIds(maxId, minId);
+	}
 }

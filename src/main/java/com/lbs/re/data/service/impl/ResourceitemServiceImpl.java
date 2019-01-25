@@ -2,6 +2,7 @@ package com.lbs.re.data.service.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +12,18 @@ import com.lbs.re.model.ReResourceitem;
 
 @Service
 public class ResourceitemServiceImpl extends BaseServiceImpl<ReResourceitem, Integer> implements ResourceitemService {
-    /**
-     * long serialVersionUID
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 * long serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private ResourceitemDAO dao;
+	private ResourceitemDAO dao;
 
-    @Autowired
-    public void setDao(ResourceitemDAO dao) {
-        this.dao = dao;
-        super.setBaseDao(dao);
-    }
+	@Autowired
+	public void setDao(ResourceitemDAO dao) {
+		this.dao = dao;
+		super.setBaseDao(dao);
+	}
 
 	@Override
 	public List<ReResourceitem> getItemListByResource(int resourceref) {
@@ -32,5 +33,15 @@ public class ResourceitemServiceImpl extends BaseServiceImpl<ReResourceitem, Int
 	@Override
 	public void updateOrderNumbers(List<ReResourceitem> itemList) {
 		dao.updateOrderNumbers(itemList);
+	}
+
+	@Override
+	public List<ReResourceitem> getLimitedItemList() {
+		return dao.getLimitedItemList();
+	}
+
+	@Override
+	public List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> resourceCriterias) {
+		return dao.getAdvancedSearchedItemList(resourceItemCriterias, resourceCriterias);
 	}
 }

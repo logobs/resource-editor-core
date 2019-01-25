@@ -39,4 +39,9 @@ public class StandardServiceImpl extends BaseServiceImpl<ReStandard, Integer> im
 		return dao.getStandardListByResourceref(resourceref);
 	}
 
+	@Override
+	public List<ReStandard> getAllByResourceitemrefIn(List<Integer> resourceItemRefIdList) {
+		return dao.getAllByResourceitemrefIn(resourceItemRefIdList);
+	}
+
 }

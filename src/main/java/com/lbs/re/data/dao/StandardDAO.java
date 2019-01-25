@@ -10,4 +10,6 @@ public interface StandardDAO extends BaseDAO<ReStandard, Integer> {
 	List<ReStandard> getStandardListByResourceref(Integer resourceref);
 
 	void deleteStandardByResourceItemref(Integer resourceitemref);
+
+	List<ReStandard> getAllByResourceitemrefIn(List<Integer> resourceItemRefIdList);
 }

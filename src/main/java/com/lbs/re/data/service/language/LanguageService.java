@@ -12,4 +12,6 @@ public interface LanguageService<T extends ReLanguageTable, ID extends Serializa
 	List<T> getLanguageListByresourceref(Integer resourceref);
 
 	void deleteLanguageByResourceItemref(Integer resourceitemref);
+
+	List<T> getAllByResourceitemrefIn(List<Integer> resourceItemRefIdList);
 }

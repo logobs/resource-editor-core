@@ -12,4 +12,6 @@ public interface LanguageDAO<T extends ReLanguageTable, ID extends Serializable>
 	List<T> getLanguageListByresourceref(Integer resourceref);
 
 	void deleteLanguageByResourceItemref(Integer resourceitemref);
+
+	List<T> getAllByResourceitemrefIn(List<Integer> resourceItemRefIdList);
 }

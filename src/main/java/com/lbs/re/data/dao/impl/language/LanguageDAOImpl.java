@@ -40,4 +40,9 @@ public class LanguageDAOImpl<T extends ReLanguageTable, ID extends Serializable>
 		repository.deleteByresourceitemref(resourceitemref);
 	}
 
+	@Override
+	public List<T> getAllByResourceitemrefIn(List<Integer> resourceItemRefIdList) {
+		return repository.findAllByResourceitemrefIn(resourceItemRefIdList);
+	}
+
 }

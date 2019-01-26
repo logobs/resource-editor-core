@@ -1,7 +1,5 @@
 package com.lbs.re.data.dao.impl.language;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,10 +20,5 @@ public class EnglishusDAOImpl extends LanguageDAOImpl<ReEnglishus, Integer> impl
 	public void setRepository(EnglishusRepository repository) {
 		this.repository = repository;
 		super.setRepository(repository);
-	}
-
-	@Override
-	public List<ReEnglishus> getEnglishListBetweenItemIds(Integer maxId, Integer minId) {
-		return repository.findAllByResourceitemrefLessThanEqualAndResourceitemrefGreaterThanEqual(maxId, minId);
 	}
 }

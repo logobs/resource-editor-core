@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,6 +36,8 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 	@PersistenceContext
 	protected EntityManager em;
 
+	private int ITEM_COUNT = 2000;
+
 	@Autowired
 	public void setRepository(ResourceitemRepository repository, DataSource dataSource) {
 		this.repository = repository;
@@ -50,29 +53,18 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 	@Override
 	@Transactional
 	public List<ReResourceitem> getLimitedItemList() {
-		List<Integer> resourceIdList = new ArrayList<>();
-		List<ReResourceitem> resultList = new ArrayList<>();
-		Criteria criteriaResource = em.unwrap(Session.class).createCriteria(ReResource.class);
-		criteriaResource.add(Restrictions.ge("resourceNr", 10));
-		criteriaResource.add(Restrictions.le("resourceNr", 15));
-		List<ReResource> resourceList = criteriaResource.list();
-		for (ReResource resource : resourceList) {
-			resourceIdList.add(resource.getId());
-		}
 		Criteria criteriaResourceItem = em.unwrap(Session.class).createCriteria(ReResourceitem.class);
-		criteriaResourceItem.add(Restrictions.in("resourceref", resourceIdList));
+		criteriaResourceItem.addOrder(Order.desc("modifiedon"));
+		criteriaResourceItem.setMaxResults(100);
 		return criteriaResourceItem.list();
 	}
-
-	private int ITEM_COUNT = 2000;
 
 	@Override
 	@Transactional
 	public List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> resourceCriterias) {
 		List<Integer> resourceIdList = new ArrayList<>();
 		List<Integer> resourceItemIdList = new ArrayList<>();
-		boolean resourceOversize = false;
-		boolean resourceItemOversize = false;
+
 		Criteria criteriaResource = em.unwrap(Session.class).createCriteria(ReResource.class);
 		for (Criterion criterion : resourceCriterias) {
 			criteriaResource.add(criterion);
@@ -81,10 +73,7 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		for (ReResource resource : resourceList) {
 			resourceIdList.add(resource.getId());
 		}
-		if (resourceIdList.size() > ITEM_COUNT) {
-			resourceOversize = true;
-			resourceIdList = resourceIdList.subList(0, ITEM_COUNT);
-		}
+		resourceIdList = checkOverSize(resourceIdList);
 
 		Criteria criteriaResourceItem = em.unwrap(Session.class).createCriteria(ReResourceitem.class);
 		for (Criterion criterion : resourceItemCriterias) {
@@ -96,20 +85,21 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 			criteriaResourceItem.add(Restrictions.in("resourceref", resourceIdList));
 		}
 		List<ReResourceitem> itemList = criteriaResourceItem.list();
-
 		for (ReResourceitem item : itemList) {
 			resourceItemIdList.add(item.getId());
 		}
-		if (resourceItemIdList.size() > ITEM_COUNT) {
-			resourceItemOversize = true;
-			resourceItemIdList = resourceItemIdList.subList(0, ITEM_COUNT);
-		}
+		resourceItemIdList = checkOverSize(resourceItemIdList);
 
-		if (resourceItemOversize || resourceOversize) {
-			System.out.println("OVERFLOWWWWWWWW");
-		}
 		return itemList;
 
+	}
+
+	private List<Integer> checkOverSize(List<Integer> idList) {
+		if (idList.size() > ITEM_COUNT) {
+			System.out.println("OVERFLOWWWWWWWW");
+			idList = idList.subList(0, ITEM_COUNT);
+		}
+		return idList;
 	}
 
 	@Override

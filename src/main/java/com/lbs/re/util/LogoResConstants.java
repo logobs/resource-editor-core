@@ -197,6 +197,8 @@ public class LogoResConstants {
     public static final String DIALOG_OK = "caption.dialog.ok";
     public static final String DIALOG_CANCEL = "caption.dialog.cancel";
 
+	public static final String ISEMPTY_CONTROL = "LOGORESOURCEEDITOR_CONSTANTISEMPTYCONTROL";
+
     private LogoResConstants() {
     }
 }

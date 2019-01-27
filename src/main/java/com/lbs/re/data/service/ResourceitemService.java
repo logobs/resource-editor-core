@@ -15,5 +15,6 @@ public interface ResourceitemService extends BaseService<ReResourceitem, Integer
 
 	void updateOrderNumbers(List<ReResourceitem> itemList);
 
-	List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> resourceCriterias);
+	List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> resourceCriterias, List<Criterion> turkishCriterias,
+			List<Criterion> englishCriterias, List<Criterion> standardCriterias);
 }

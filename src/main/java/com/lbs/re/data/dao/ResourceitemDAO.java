@@ -11,7 +11,8 @@ public interface ResourceitemDAO extends BaseDAO<ReResourceitem, Integer> {
 
 	void updateOrderNumbers(List<ReResourceitem> itemList);
 
-	List<ReResourceitem> getLimitedItemList();
+	List<ReResourceitem> getLastModifiedItemList();
 
-	List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> resourceCriterias);
+	List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> resourceCriterias, List<Criterion> turkishCriterias,
+			List<Criterion> englishCriterias, List<Criterion> standardCriterias);
 }

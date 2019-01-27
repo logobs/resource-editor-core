@@ -91,7 +91,7 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		if (resourceList.isEmpty()) {
 			return new ArrayList<>();
 		} else {
-			criteriaResourceItem.add(Restrictions.between("id", resourceIdList.get("min"), resourceIdList.get("max")));
+			criteriaResourceItem.add(Restrictions.between("resourceref", resourceIdList.get("min"), resourceIdList.get("max")));
 		}
 		for (Criterion criterion : resourceItemCriterias) {
 			criteriaResourceItem.add(criterion);
@@ -126,7 +126,7 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 				criteriaTurkish.add(criterion);
 			}
 		}
-		criteriaTurkish.add(Restrictions.between("id", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
+		criteriaTurkish.add(Restrictions.between("resourceitemref", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
 		List<ReTurkishtr> turkishList = criteriaTurkish.list();
 		if (turkishList.isEmpty()) {
 			return new ArrayList<>();
@@ -163,7 +163,7 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 				criteriaEnglish.add(criterion);
 			}
 		}
-		criteriaEnglish.add(Restrictions.between("id", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
+		criteriaEnglish.add(Restrictions.between("resourceitemref", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
 		List<ReEnglishus> englishList = criteriaEnglish.list();
 		if (englishList.isEmpty()) {
 			return new ArrayList<>();
@@ -200,7 +200,7 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 				criteriaStandrd.add(criterion);
 			}
 		}
-		criteriaStandrd.add(Restrictions.between("id", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
+		criteriaStandrd.add(Restrictions.between("resourceitemref", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
 		List<ReStandard> standardList = criteriaStandrd.list();
 		if (standardList.isEmpty()) {
 			return new ArrayList<>();

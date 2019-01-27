@@ -70,6 +70,9 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 	public List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> resourceCriterias, List<Criterion> turkishCriterias,
 			List<Criterion> englishCriterias, List<Criterion> standardCriterias) {
 		List<ReResource> resourceList = generateResourceListByCriterias(resourceCriterias);
+		if (resourceList.isEmpty()) {
+			return new ArrayList<>();
+		}
 		Map<String, Integer> resourceIdList = findMinAndMaxId(resourceList);
 		List<ReResourceitem> itemList = generateResourceItemListByCriterias(resourceItemCriterias, resourceList, resourceIdList, turkishCriterias, englishCriterias,
 				standardCriterias);
@@ -101,14 +104,23 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 			Map<String, Integer> resourceItemIdList = findMinAndMaxId(itemList);
 			if (!turkishCriterias.isEmpty()) {
 				itemList = generateTurkishItemList(itemList, turkishCriterias, resourceItemIdList);
+				if (itemList.isEmpty()) {
+					return new ArrayList();
+				}
 				resourceItemIdList = findMinAndMaxId(itemList);
 			}
 			if (!englishCriterias.isEmpty()) {
 				itemList = generateEnglishItemList(itemList, englishCriterias, resourceItemIdList);
+				if (itemList.isEmpty()) {
+					return new ArrayList();
+				}
 				resourceItemIdList = findMinAndMaxId(itemList);
 			}
 			if (!standardCriterias.isEmpty()) {
 				itemList = generateStandardItemList(itemList, standardCriterias, resourceItemIdList);
+				if (itemList.isEmpty()) {
+					return new ArrayList();
+				}
 				resourceItemIdList = findMinAndMaxId(itemList);
 			}
 		}

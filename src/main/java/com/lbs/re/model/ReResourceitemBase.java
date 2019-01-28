@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -75,6 +78,10 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 
 	@Column(name = "DICTIONARYID")
 	private Integer dictionaryId;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RESOURCEREF", insertable = false, updatable = false)
+	private ReResourceAtom resourceAtom;
 
 	public final Integer getActive() {
 		return active;
@@ -226,6 +233,14 @@ public class ReResourceitemBase extends AbstractBaseEntity {
 
 	public void setDictionaryId(Integer dictionaryId) {
 		this.dictionaryId = dictionaryId;
+	}
+
+	public ReResourceAtom getResourceAtom() {
+		return resourceAtom;
+	}
+
+	public void setResourceAtom(ReResourceAtom resourceAtom) {
+		this.resourceAtom = resourceAtom;
 	}
 
 	public ReResourceitemBase() {

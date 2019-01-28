@@ -41,8 +41,8 @@ public class ResourceitemServiceImpl extends BaseServiceImpl<ReResourceitem, Int
 	}
 
 	@Override
-	public List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> resourceCriterias, List<Criterion> turkishCriterias,
-			List<Criterion> englishCriterias, List<Criterion> standardCriterias) {
-		return dao.getAdvancedSearchedItemList(resourceItemCriterias, resourceCriterias, turkishCriterias, englishCriterias, standardCriterias);
+	public List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> turkishCriterias, List<Criterion> englishCriterias,
+			List<Criterion> standardCriterias) {
+		return dao.getAdvancedSearchedItemList(resourceItemCriterias, turkishCriterias, englishCriterias, standardCriterias);
 	}
 }

@@ -23,7 +23,6 @@ import org.springframework.stereotype.Component;
 import com.lbs.re.data.dao.ResourceitemDAO;
 import com.lbs.re.data.repository.ResourceitemRepository;
 import com.lbs.re.model.AbstractBaseEntity;
-import com.lbs.re.model.ReResource;
 import com.lbs.re.model.ReResourceitem;
 import com.lbs.re.model.ReStandard;
 import com.lbs.re.model.languages.ReEnglishus;
@@ -67,35 +66,16 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 
 	@Override
 	@Transactional
-	public List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> resourceCriterias, List<Criterion> turkishCriterias,
-			List<Criterion> englishCriterias, List<Criterion> standardCriterias) {
-		List<ReResource> resourceList = generateResourceListByCriterias(resourceCriterias);
-		if (resourceList.isEmpty()) {
-			return new ArrayList<>();
-		}
-		Map<String, Integer> resourceIdList = findMinAndMaxId(resourceList);
-		List<ReResourceitem> itemList = generateResourceItemListByCriterias(resourceItemCriterias, resourceList, resourceIdList, turkishCriterias, englishCriterias,
-				standardCriterias);
+	public List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> turkishCriterias, List<Criterion> englishCriterias,
+			List<Criterion> standardCriterias) {
+		List<ReResourceitem> itemList = generateResourceItemListByCriterias(resourceItemCriterias, turkishCriterias, englishCriterias, standardCriterias);
 		return itemList;
 	}
 
-	private List<ReResource> generateResourceListByCriterias(List<Criterion> resourceCriterias) {
-		Criteria criteriaResource = em.unwrap(Session.class).createCriteria(ReResource.class);
-		for (Criterion criterion : resourceCriterias) {
-			criteriaResource.add(criterion);
-		}
-		List<ReResource> resourceList = criteriaResource.list();
-		return resourceList;
-	}
-
-	private List<ReResourceitem> generateResourceItemListByCriterias(List<Criterion> resourceItemCriterias, List<ReResource> resourceList, Map<String, Integer> resourceIdList,
-			List<Criterion> turkishCriterias, List<Criterion> englishCriterias, List<Criterion> standardCriterias) {
+	private List<ReResourceitem> generateResourceItemListByCriterias(List<Criterion> resourceItemCriterias, List<Criterion> turkishCriterias, List<Criterion> englishCriterias,
+			List<Criterion> standardCriterias) {
 		Criteria criteriaResourceItem = em.unwrap(Session.class).createCriteria(ReResourceitem.class);
-		if (resourceList.isEmpty()) {
-			return new ArrayList<>();
-		} else {
-			criteriaResourceItem.add(Restrictions.between("resourceref", resourceIdList.get("min"), resourceIdList.get("max")));
-		}
+		criteriaResourceItem.createAlias("resourceAtom", "resource");
 		for (Criterion criterion : resourceItemCriterias) {
 			criteriaResourceItem.add(criterion);
 		}

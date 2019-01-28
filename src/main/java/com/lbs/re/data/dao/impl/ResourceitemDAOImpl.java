@@ -111,6 +111,7 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		List<ReResourceitem> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
 		Criteria criteriaTurkish = em.unwrap(Session.class).createCriteria(ReTurkishtr.class);
+		criteriaTurkish.add(Restrictions.between("resourceitemref", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
 		for (Criterion criterion : turkishCriterias) {
 			if (criterion.toString().contains(LogoResConstants.ISEMPTY_CONTROL)) {
 				isEmpyCriteria = true;
@@ -118,7 +119,6 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 				criteriaTurkish.add(criterion);
 			}
 		}
-		criteriaTurkish.add(Restrictions.between("resourceitemref", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
 		List<ReTurkishtr> turkishList = criteriaTurkish.list();
 		if (turkishList.isEmpty()) {
 			return new ArrayList<>();
@@ -148,6 +148,7 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		List<ReResourceitem> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
 		Criteria criteriaEnglish = em.unwrap(Session.class).createCriteria(ReEnglishus.class);
+		criteriaEnglish.add(Restrictions.between("resourceitemref", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
 		for (Criterion criterion : englishCriterias) {
 			if (criterion.toString().contains(LogoResConstants.ISEMPTY_CONTROL)) {
 				isEmpyCriteria = true;
@@ -155,7 +156,6 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 				criteriaEnglish.add(criterion);
 			}
 		}
-		criteriaEnglish.add(Restrictions.between("resourceitemref", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
 		List<ReEnglishus> englishList = criteriaEnglish.list();
 		if (englishList.isEmpty()) {
 			return new ArrayList<>();
@@ -185,6 +185,7 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		List<ReResourceitem> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
 		Criteria criteriaStandrd = em.unwrap(Session.class).createCriteria(ReStandard.class);
+		criteriaStandrd.add(Restrictions.between("resourceitemref", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
 		for (Criterion criterion : standardCriterias) {
 			if (criterion.toString().contains(LogoResConstants.ISEMPTY_CONTROL)) {
 				isEmpyCriteria = true;
@@ -192,7 +193,6 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 				criteriaStandrd.add(criterion);
 			}
 		}
-		criteriaStandrd.add(Restrictions.between("resourceitemref", resourceItemIdList.get("min"), resourceItemIdList.get("max")));
 		List<ReStandard> standardList = criteriaStandrd.list();
 		if (standardList.isEmpty()) {
 			return new ArrayList<>();
@@ -220,7 +220,15 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 
 	private <T extends AbstractBaseEntity> Map<String, Integer> findMinAndMaxId(List<T> itemList) {
 		int minId = itemList.get(0).getId();
-		int maxId = itemList.get(itemList.size() - 1).getId();
+		int maxId = itemList.get(0).getId();
+		for (T item : itemList) {
+			if (item.getId() > maxId) {
+				maxId = item.getId();
+			}
+			if (item.getId() < minId) {
+				minId = item.getId();
+			}
+		}
 		Map<String, Integer> listInfo = new HashMap<>();
 		listInfo.put("min", minId);
 		listInfo.put("max", maxId);

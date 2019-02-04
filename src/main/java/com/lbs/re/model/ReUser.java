@@ -502,4 +502,9 @@ public class ReUser extends AbstractBaseEntity implements Serializable {
 		return getId() != null;
 	}
 
+	@Override
+	public String toString() {
+		return getUsername();
+	}
+
 }

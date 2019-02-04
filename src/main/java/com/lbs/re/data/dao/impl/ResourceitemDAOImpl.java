@@ -1,10 +1,10 @@
 package com.lbs.re.data.dao.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,9 +12,12 @@ import javax.sql.DataSource;
 import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
+import org.hibernate.ScrollMode;
+import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +25,6 @@ import org.springframework.stereotype.Component;
 
 import com.lbs.re.data.dao.ResourceitemDAO;
 import com.lbs.re.data.repository.ResourceitemRepository;
-import com.lbs.re.model.AbstractBaseEntity;
 import com.lbs.re.model.ReResourceitem;
 import com.lbs.re.model.ReStandard;
 import com.lbs.re.model.languages.ReEnglishus;
@@ -55,6 +57,7 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		return repository.findByresourceref(resourceref);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<ReResourceitem> getLastModifiedItemList() {
@@ -74,53 +77,57 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 
 	private List<ReResourceitem> generateResourceItemListByCriterias(List<Criterion> resourceItemCriterias, List<Criterion> turkishCriterias, List<Criterion> englishCriterias,
 			List<Criterion> standardCriterias) {
-		Criteria criteriaResourceItem = em.unwrap(Session.class).createCriteria(ReResourceitem.class);
+		Criteria criteriaResourceItem = em.unwrap(Session.class).createCriteria(ReResourceitem.class)
+				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")
+						.add(Projections.property("resourceAtom.id"), "resourceId"));
 		criteriaResourceItem.createAlias("resourceAtom", "resource");
 		for (Criterion criterion : resourceItemCriterias) {
 			criteriaResourceItem.add(criterion);
 		}
-		List<ReResourceitem> itemList = criteriaResourceItem.list();
-		List<Integer> resourceIdList = getLimitedResourceRefList(generateResourceIdList(itemList));
-		if (!itemList.isEmpty()) {
-			Map<String, Integer> resourceItemIdList = findMinAndMaxId(itemList);
+		List<Integer> itemIdList = new ArrayList<>();
+		Set<Integer> resourceIdHashList = new HashSet<>();
+		ScrollableResults scroll = criteriaResourceItem.setReadOnly(true).scroll(ScrollMode.FORWARD_ONLY);
+		while (scroll.next()) {
+			Integer itemId = (Integer) scroll.get()[0];
+			Integer resourceId = (Integer) scroll.get()[1];
+			itemIdList.add(itemId);
+			resourceIdHashList.add(resourceId);
+		}
+		List<Integer> resourceIdList = getLimitedResourceRefList(resourceIdHashList);
+		if (!itemIdList.isEmpty()) {
 			if (!turkishCriterias.isEmpty()) {
-				itemList = generateTurkishItemList(itemList, turkishCriterias, resourceItemIdList, resourceIdList);
-				if (itemList.isEmpty()) {
-					return new ArrayList();
+				itemIdList = generateTurkishItemList(itemIdList, turkishCriterias, resourceIdList);
+				if (itemIdList.isEmpty()) {
+					return new ArrayList<ReResourceitem>();
 				}
-				resourceItemIdList = findMinAndMaxId(itemList);
 			}
 			if (!englishCriterias.isEmpty()) {
-				itemList = generateEnglishItemList(itemList, englishCriterias, resourceItemIdList, resourceIdList);
-				if (itemList.isEmpty()) {
-					return new ArrayList();
+				itemIdList = generateEnglishItemList(itemIdList, englishCriterias, resourceIdList);
+				if (itemIdList.isEmpty()) {
+					return new ArrayList<ReResourceitem>();
 				}
-				resourceItemIdList = findMinAndMaxId(itemList);
 			}
 			if (!standardCriterias.isEmpty()) {
-				itemList = generateStandardItemList(itemList, standardCriterias, resourceItemIdList, resourceIdList);
-				if (itemList.isEmpty()) {
-					return new ArrayList();
+				itemIdList = generateStandardItemList(itemIdList, standardCriterias, resourceIdList);
+				if (itemIdList.isEmpty()) {
+					return new ArrayList<ReResourceitem>();
 				}
-				resourceItemIdList = findMinAndMaxId(itemList);
 			}
 		}
-		return itemList;
-	}
 
-	private List<Integer> generateResourceIdList(List<ReResourceitem> itemList) {
-		List<Integer> resourceIdList = new ArrayList<>();
-		for (ReResourceitem item : itemList) {
-			if (!resourceIdList.contains(item.getResourceref())) {
-				resourceIdList.add(item.getResourceref());
-			}
+		List<ReResourceitem> refinedList = new ArrayList<>();
+		for (Integer value : itemIdList) {
+			ReResourceitem newInstance = new ReResourceitem();
+			newInstance.setId(value);
+			refinedList.add(newInstance);
 		}
-		return resourceIdList;
+		return refinedList;
 	}
 
-	private List<ReResourceitem> generateTurkishItemList(List<ReResourceitem> itemList, List<Criterion> turkishCriterias, Map<String, Integer> resourceItemIdList,
-			List<Integer> resourceIdList) {
-		List<ReResourceitem> removedItemList = new ArrayList<>();
+	@SuppressWarnings("unchecked")
+	private List<Integer> generateTurkishItemList(List<Integer> itemList,
+			List<Criterion> turkishCriterias, List<Integer> resourceIdList) {
+		List<Integer> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
 		Criteria criteriaTurkish = em.unwrap(Session.class).createCriteria(ReTurkishtr.class);
 		criteriaTurkish.add(Restrictions.in("resourceref", resourceIdList));
@@ -135,12 +142,12 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		if (turkishList.isEmpty()) {
 			return new ArrayList<>();
 		}
-		Iterator<ReResourceitem> itemIterator = itemList.iterator();
+		Iterator<Integer> itemIterator = itemList.iterator();
 		while (itemIterator.hasNext()) {
-			ReResourceitem reResourceitem = itemIterator.next();
+			Integer reResourceitem = itemIterator.next();
 			boolean isFound = false;
 			for (ReTurkishtr tr : turkishList) {
-				if (tr.getResourceitemref().equals(reResourceitem.getId())) {
+				if (tr.getResourceitemref().equals(reResourceitem)) {
 					isFound = true;
 					break;
 				}
@@ -156,9 +163,10 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		return itemList;
 	}
 
-	private List<ReResourceitem> generateEnglishItemList(List<ReResourceitem> itemList, List<Criterion> englishCriterias, Map<String, Integer> resourceItemIdList,
-			List<Integer> resourceIdList) {
-		List<ReResourceitem> removedItemList = new ArrayList<>();
+	@SuppressWarnings("unchecked")
+	private List<Integer> generateEnglishItemList(List<Integer> itemList,
+			List<Criterion> englishCriterias, List<Integer> resourceIdList) {
+		List<Integer> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
 		Criteria criteriaEnglish = em.unwrap(Session.class).createCriteria(ReEnglishus.class);
 		criteriaEnglish.add(Restrictions.in("resourceref", resourceIdList));
@@ -173,12 +181,12 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		if (englishList.isEmpty()) {
 			return new ArrayList<>();
 		}
-		Iterator<ReResourceitem> itemIterator = itemList.iterator();
+		Iterator<Integer> itemIterator = itemList.iterator();
 		while (itemIterator.hasNext()) {
-			ReResourceitem reResourceitem = itemIterator.next();
+			Integer reResourceitem = itemIterator.next();
 			boolean isFound = false;
 			for (ReEnglishus us : englishList) {
-				if (us.getResourceitemref().equals(reResourceitem.getId())) {
+				if (us.getResourceitemref().equals(reResourceitem)) {
 					isFound = true;
 					break;
 				}
@@ -194,9 +202,10 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		return itemList;
 	}
 
-	private List<ReResourceitem> generateStandardItemList(List<ReResourceitem> itemList, List<Criterion> standardCriterias, Map<String, Integer> resourceItemIdList,
-			List<Integer> resourceIdList) {
-		List<ReResourceitem> removedItemList = new ArrayList<>();
+	@SuppressWarnings("unchecked")
+	private List<Integer> generateStandardItemList(List<Integer> itemList,
+			List<Criterion> standardCriterias, List<Integer> resourceIdList) {
+		List<Integer> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
 		Criteria criteriaStandrd = em.unwrap(Session.class).createCriteria(ReStandard.class);
 		criteriaStandrd.add(Restrictions.in("resourceref", resourceIdList));
@@ -211,12 +220,12 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		if (standardList.isEmpty()) {
 			return new ArrayList<>();
 		}
-		Iterator<ReResourceitem> itemIterator = itemList.iterator();
+		Iterator<Integer> itemIterator = itemList.iterator();
 		while (itemIterator.hasNext()) {
-			ReResourceitem reResourceitem = itemIterator.next();
+			Integer reResourceitem = itemIterator.next();
 			boolean isFound = false;
 			for (ReStandard st : standardList) {
-				if (st.getResourceitemref().equals(reResourceitem.getId())) {
+				if (st.getResourceitemref().equals(reResourceitem)) {
 					isFound = true;
 					break;
 				}
@@ -232,28 +241,17 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		return itemList;
 	}
 
-	private <T extends AbstractBaseEntity> Map<String, Integer> findMinAndMaxId(List<T> itemList) {
-		int minId = itemList.get(0).getId();
-		int maxId = itemList.get(0).getId();
-		for (T item : itemList) {
-			if (item.getId() > maxId) {
-				maxId = item.getId();
-			}
-			if (item.getId() < minId) {
-				minId = item.getId();
-			}
-		}
-		Map<String, Integer> listInfo = new HashMap<>();
-		listInfo.put("min", minId);
-		listInfo.put("max", maxId);
-		return listInfo;
-	}
-
-	private List<Integer> getLimitedResourceRefList(List<Integer> resourceRefList) {
+	private List<Integer> getLimitedResourceRefList(Set<Integer> resourceRefList) {
+		List<Integer> newList = new ArrayList<>();
 		if (resourceRefList.size() > 2000) {
-			resourceRefList = resourceRefList.subList(0, 2000);
+			Iterator<Integer> iterator = resourceRefList.iterator();
+			for (int i = 0; i < 2000; i++) {
+				newList.add(iterator.next());
+			}
+		} else {
+			newList.addAll(resourceRefList);
 		}
-		return resourceRefList;
+		return newList;
 	}
 
 	@Override

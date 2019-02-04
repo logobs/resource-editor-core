@@ -9,4 +9,6 @@ public interface ResourceService extends BaseService<ReResource, Integer> {
 	ReResource getResourceByNumber(int resourceNr);
 
 	int getMaxResourceNumber();
+
+	int getFirstAvailableResourceNumber(int resourceNr);
 }

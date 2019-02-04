@@ -1,5 +1,7 @@
 package com.lbs.re.data.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,5 +32,20 @@ public class ResourceDAOImpl extends BaseDAOImpl<ReResource, Integer> implements
 	@Override
 	public int getMaxResourceNumber() {
 		return repository.getMaxResourceNumber();
+	}
+
+	@Override
+	public int getFirstAvailableResourceNumber(int resourceNr) {
+		List<Integer> resourceNrList = repository.getResourceNrList(resourceNr);
+		int before = resourceNrList.get(0);
+		int result = 0;
+		for (Integer number : resourceNrList) {
+			if (number - before > 1) {
+				result = before + 1;
+				break;
+			}
+			before = number;
+		}
+		return result;
 	}
 }

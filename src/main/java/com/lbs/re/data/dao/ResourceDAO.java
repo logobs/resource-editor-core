@@ -6,4 +6,6 @@ public interface ResourceDAO extends BaseDAO<ReResource, Integer> {
 	ReResource getResourceByNumber(int resourceNr);
 
 	int getMaxResourceNumber();
+
+	int getFirstAvailableResourceNumber(int resourceNr);
 }

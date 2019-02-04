@@ -32,4 +32,9 @@ public class ResourceServiceImpl extends BaseServiceImpl<ReResource, Integer> im
 		// TODO Auto-generated method stub
 		return dao.getMaxResourceNumber();
 	}
+
+	@Override
+	public int getFirstAvailableResourceNumber(int resourceNr) {
+		return dao.getFirstAvailableResourceNumber(resourceNr);
+	}
 }

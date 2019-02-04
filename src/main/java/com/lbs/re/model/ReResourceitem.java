@@ -201,10 +201,6 @@ public class ReResourceitem extends ReResourceitemBase implements Serializable, 
 		this.turkmenTm = turkmenTm;
 	}
 
-	public Integer getResourceNr() {
-		return getResourceAtom().getResourceNr();
-	}
-
 	public ReResourceitem copyResourceItem(ReResource resource) {
 		ReResourceitem copiedResourceItem = new ReResourceitem();
 		copiedResourceItem.setActive(getActive());

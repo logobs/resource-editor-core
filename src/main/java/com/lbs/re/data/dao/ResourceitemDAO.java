@@ -15,4 +15,8 @@ public interface ResourceitemDAO extends BaseDAO<ReResourceitem, Integer> {
 
 	List<ReResourceitem> getAdvancedSearchedItemList(List<Criterion> resourceItemCriterias, List<Criterion> turkishCriterias, List<Criterion> englishCriterias,
 			List<Criterion> standardCriterias);
+
+	Integer getMaximumOrderNumberByResourceRef(int resourceref);
+
+	Integer getMaximumTagNumberByResourceRef(int resourceref);
 }

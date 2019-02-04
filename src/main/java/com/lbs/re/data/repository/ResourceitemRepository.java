@@ -7,4 +7,8 @@ import com.lbs.re.model.ReResourceitem;
 
 public interface ResourceitemRepository extends BaseRepository<ReResourceitem, Integer> {
 	List<ReResourceitem> findByresourceref(int resourceref);
+
+	ReResourceitem findTop1ByresourcerefOrderByOrdernrDesc(int resourceref);
+
+	ReResourceitem findTop1ByresourcerefOrderByTagnrDesc(int resourceref);
 }

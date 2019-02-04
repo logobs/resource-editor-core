@@ -45,4 +45,14 @@ public class ResourceitemServiceImpl extends BaseServiceImpl<ReResourceitem, Int
 			List<Criterion> standardCriterias) {
 		return dao.getAdvancedSearchedItemList(resourceItemCriterias, turkishCriterias, englishCriterias, standardCriterias);
 	}
+
+	@Override
+	public Integer getMaximumOrderNumberByResourceRef(int resourceref) {
+		return dao.getMaximumOrderNumberByResourceRef(resourceref);
+	}
+
+	@Override
+	public Integer getMaximumTagNumberByResourceRef(int resourceref) {
+		return dao.getMaximumTagNumberByResourceRef(resourceref);
+	}
 }

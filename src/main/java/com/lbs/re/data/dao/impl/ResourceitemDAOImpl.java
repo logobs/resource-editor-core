@@ -265,4 +265,24 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 		jdbcTemplate.batchUpdate(sql, parameters);
 	}
 
+	@Override
+	public Integer getMaximumOrderNumberByResourceRef(int resourceref) {
+		ReResourceitem item = repository.findTop1ByresourcerefOrderByOrdernrDesc(resourceref);
+		if (item != null) {
+			return item.getOrdernr();
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public Integer getMaximumTagNumberByResourceRef(int resourceref) {
+		ReResourceitem item = repository.findTop1ByresourcerefOrderByTagnrDesc(resourceref);
+		if (item != null) {
+			return item.getTagnr();
+		} else {
+			return null;
+		}
+	}
+
 }

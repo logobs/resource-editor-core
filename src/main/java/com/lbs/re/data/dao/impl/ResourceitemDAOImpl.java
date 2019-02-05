@@ -2,11 +2,9 @@ package com.lbs.re.data.dao.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,7 +18,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -80,37 +77,32 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 	private List<ReResourceitem> generateResourceItemListByCriterias(List<Criterion> resourceItemCriterias, List<Criterion> turkishCriterias, List<Criterion> englishCriterias,
 			List<Criterion> standardCriterias) {
 		Criteria criteriaResourceItem = em.unwrap(Session.class).createCriteria(ReResourceitem.class)
-				.setProjection(Projections.projectionList().add(Projections.property("id"), "id")
-						.add(Projections.property("resourceAtom.id"), "resourceId"));
+				.setProjection(Projections.projectionList().add(Projections.property("id"), "id"));
 		criteriaResourceItem.createAlias("resourceAtom", "resource");
 		for (Criterion criterion : resourceItemCriterias) {
 			criteriaResourceItem.add(criterion);
 		}
 		List<Integer> itemIdList = new ArrayList<>();
-		Set<Integer> resourceIdHashList = new HashSet<>();
 		ScrollableResults scroll = criteriaResourceItem.setReadOnly(true).scroll(ScrollMode.FORWARD_ONLY);
 		while (scroll.next()) {
 			Integer itemId = (Integer) scroll.get()[0];
-			Integer resourceId = (Integer) scroll.get()[1];
 			itemIdList.add(itemId);
-			resourceIdHashList.add(resourceId);
 		}
-		List<Integer> resourceIdList = getLimitedResourceRefList(resourceIdHashList);
 		if (!itemIdList.isEmpty()) {
 			if (!turkishCriterias.isEmpty()) {
-				itemIdList = generateTurkishItemList(itemIdList, turkishCriterias, resourceIdList);
+				itemIdList = generateTurkishItemList(itemIdList, turkishCriterias);
 				if (itemIdList.isEmpty()) {
 					return new ArrayList<ReResourceitem>();
 				}
 			}
 			if (!englishCriterias.isEmpty()) {
-				itemIdList = generateEnglishItemList(itemIdList, englishCriterias, resourceIdList);
+				itemIdList = generateEnglishItemList(itemIdList, englishCriterias);
 				if (itemIdList.isEmpty()) {
 					return new ArrayList<ReResourceitem>();
 				}
 			}
 			if (!standardCriterias.isEmpty()) {
-				itemIdList = generateStandardItemList(itemIdList, standardCriterias, resourceIdList);
+				itemIdList = generateStandardItemList(itemIdList, standardCriterias);
 				if (itemIdList.isEmpty()) {
 					return new ArrayList<ReResourceitem>();
 				}
@@ -127,13 +119,11 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<Integer> generateTurkishItemList(List<Integer> itemList,
-			List<Criterion> turkishCriterias, List<Integer> resourceIdList) {
+	private List<Integer> generateTurkishItemList(List<Integer> itemList, List<Criterion> turkishCriterias) {
 		List<Integer> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
 		Criteria criteriaTurkish = em.unwrap(Session.class).createCriteria(ReTurkishtr.class).setProjection(
 				Projections.projectionList().add(Projections.property("resourceitemref"), "resourceitemref"));
-		criteriaTurkish.add(Restrictions.in("resourceref", resourceIdList));
 		for (Criterion criterion : turkishCriterias) {
 			if (criterion.toString().contains(LogoResConstants.ISEMPTY_CONTROL)) {
 				isEmpyCriteria = true;
@@ -169,13 +159,11 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<Integer> generateEnglishItemList(List<Integer> itemList,
-			List<Criterion> englishCriterias, List<Integer> resourceIdList) {
+	private List<Integer> generateEnglishItemList(List<Integer> itemList, List<Criterion> englishCriterias) {
 		List<Integer> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
 		Criteria criteriaEnglish = em.unwrap(Session.class).createCriteria(ReEnglishus.class).setProjection(
 				Projections.projectionList().add(Projections.property("resourceitemref"), "resourceitemref"));
-		criteriaEnglish.add(Restrictions.in("resourceref", resourceIdList));
 		for (Criterion criterion : englishCriterias) {
 			if (criterion.toString().contains(LogoResConstants.ISEMPTY_CONTROL)) {
 				isEmpyCriteria = true;
@@ -211,13 +199,11 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<Integer> generateStandardItemList(List<Integer> itemList,
-			List<Criterion> standardCriterias, List<Integer> resourceIdList) {
+	private List<Integer> generateStandardItemList(List<Integer> itemList, List<Criterion> standardCriterias) {
 		List<Integer> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
 		Criteria criteriaStandrd = em.unwrap(Session.class).createCriteria(ReStandard.class).setProjection(
 				Projections.projectionList().add(Projections.property("resourceitemref"), "resourceitemref"));
-		criteriaStandrd.add(Restrictions.in("resourceref", resourceIdList));
 		for (Criterion criterion : standardCriterias) {
 			if (criterion.toString().contains(LogoResConstants.ISEMPTY_CONTROL)) {
 				isEmpyCriteria = true;
@@ -250,19 +236,6 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 			return removedItemList;
 		}
 		return itemList;
-	}
-
-	private List<Integer> getLimitedResourceRefList(Set<Integer> resourceRefList) {
-		List<Integer> newList = new ArrayList<>();
-		if (resourceRefList.size() > 2000) {
-			Iterator<Integer> iterator = resourceRefList.iterator();
-			for (int i = 0; i < 2000; i++) {
-				newList.add(iterator.next());
-			}
-		} else {
-			newList.addAll(resourceRefList);
-		}
-		return newList;
 	}
 
 	@Override

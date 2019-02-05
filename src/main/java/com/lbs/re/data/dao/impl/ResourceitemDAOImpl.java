@@ -1,9 +1,11 @@
 package com.lbs.re.data.dao.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -129,7 +131,8 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 			List<Criterion> turkishCriterias, List<Integer> resourceIdList) {
 		List<Integer> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
-		Criteria criteriaTurkish = em.unwrap(Session.class).createCriteria(ReTurkishtr.class);
+		Criteria criteriaTurkish = em.unwrap(Session.class).createCriteria(ReTurkishtr.class).setProjection(
+				Projections.projectionList().add(Projections.property("resourceitemref"), "resourceitemref"));
 		criteriaTurkish.add(Restrictions.in("resourceref", resourceIdList));
 		for (Criterion criterion : turkishCriterias) {
 			if (criterion.toString().contains(LogoResConstants.ISEMPTY_CONTROL)) {
@@ -138,19 +141,21 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 				criteriaTurkish.add(criterion);
 			}
 		}
-		List<ReTurkishtr> turkishList = criteriaTurkish.list();
+		List<Integer> turkishList = criteriaTurkish.list();
 		if (turkishList.isEmpty()) {
 			return new ArrayList<>();
+		}
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for (Integer i : turkishList) {
+			map.put(i, i);
 		}
 		Iterator<Integer> itemIterator = itemList.iterator();
 		while (itemIterator.hasNext()) {
 			Integer reResourceitem = itemIterator.next();
 			boolean isFound = false;
-			for (ReTurkishtr tr : turkishList) {
-				if (tr.getResourceitemref().equals(reResourceitem)) {
-					isFound = true;
-					break;
-				}
+			Integer value = map.get(reResourceitem);
+			if (value != null) {
+				isFound = true;
 			}
 			if (!isFound) {
 				removedItemList.add(reResourceitem);
@@ -168,7 +173,8 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 			List<Criterion> englishCriterias, List<Integer> resourceIdList) {
 		List<Integer> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
-		Criteria criteriaEnglish = em.unwrap(Session.class).createCriteria(ReEnglishus.class);
+		Criteria criteriaEnglish = em.unwrap(Session.class).createCriteria(ReEnglishus.class).setProjection(
+				Projections.projectionList().add(Projections.property("resourceitemref"), "resourceitemref"));
 		criteriaEnglish.add(Restrictions.in("resourceref", resourceIdList));
 		for (Criterion criterion : englishCriterias) {
 			if (criterion.toString().contains(LogoResConstants.ISEMPTY_CONTROL)) {
@@ -177,19 +183,21 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 				criteriaEnglish.add(criterion);
 			}
 		}
-		List<ReEnglishus> englishList = criteriaEnglish.list();
+		List<Integer> englishList = criteriaEnglish.list();
 		if (englishList.isEmpty()) {
 			return new ArrayList<>();
+		}
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for (Integer i : englishList) {
+			map.put(i, i);
 		}
 		Iterator<Integer> itemIterator = itemList.iterator();
 		while (itemIterator.hasNext()) {
 			Integer reResourceitem = itemIterator.next();
 			boolean isFound = false;
-			for (ReEnglishus us : englishList) {
-				if (us.getResourceitemref().equals(reResourceitem)) {
-					isFound = true;
-					break;
-				}
+			Integer value = map.get(reResourceitem);
+			if (value != null) {
+				isFound = true;
 			}
 			if (!isFound) {
 				removedItemList.add(reResourceitem);
@@ -207,7 +215,8 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 			List<Criterion> standardCriterias, List<Integer> resourceIdList) {
 		List<Integer> removedItemList = new ArrayList<>();
 		boolean isEmpyCriteria = false;
-		Criteria criteriaStandrd = em.unwrap(Session.class).createCriteria(ReStandard.class);
+		Criteria criteriaStandrd = em.unwrap(Session.class).createCriteria(ReStandard.class).setProjection(
+				Projections.projectionList().add(Projections.property("resourceitemref"), "resourceitemref"));
 		criteriaStandrd.add(Restrictions.in("resourceref", resourceIdList));
 		for (Criterion criterion : standardCriterias) {
 			if (criterion.toString().contains(LogoResConstants.ISEMPTY_CONTROL)) {
@@ -216,19 +225,21 @@ public class ResourceitemDAOImpl extends BaseDAOImpl<ReResourceitem, Integer> im
 				criteriaStandrd.add(criterion);
 			}
 		}
-		List<ReStandard> standardList = criteriaStandrd.list();
+		List<Integer> standardList = criteriaStandrd.list();
 		if (standardList.isEmpty()) {
 			return new ArrayList<>();
+		}
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for (Integer i : standardList) {
+			map.put(i, i);
 		}
 		Iterator<Integer> itemIterator = itemList.iterator();
 		while (itemIterator.hasNext()) {
 			Integer reResourceitem = itemIterator.next();
 			boolean isFound = false;
-			for (ReStandard st : standardList) {
-				if (st.getResourceitemref().equals(reResourceitem)) {
-					isFound = true;
-					break;
-				}
+			Integer value = map.get(reResourceitem);
+			if (value != null) {
+				isFound = true;
 			}
 			if (!isFound) {
 				removedItemList.add(reResourceitem);

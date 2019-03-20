@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.lbs.re.data.dao.ResourceDAO;
 import com.lbs.re.data.service.ResourceService;
 import com.lbs.re.model.ReResource;
+import com.lbs.re.model.ReResourceGroup;
 
 @Service
 public class ResourceServiceImpl extends BaseServiceImpl<ReResource, Integer> implements ResourceService {
@@ -36,5 +37,10 @@ public class ResourceServiceImpl extends BaseServiceImpl<ReResource, Integer> im
 	@Override
 	public int getFirstAvailableResourceNumber(int resourceNr) {
 		return dao.getFirstAvailableResourceNumber(resourceNr);
+	}
+
+	@Override
+	public ReResource getResourceByNumberAndGroup(int resourceNr, ReResourceGroup resourceGroup) {
+		return dao.getResourceByNumberAndGroup(resourceNr, resourceGroup);
 	}
 }
